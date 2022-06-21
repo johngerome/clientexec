@@ -1,0 +1,2252 @@
+6.5.0
+* System / Admin
+    - Add the Garuda font files for PDF Invoices. (MG)
+    - Updated Blesta importer to properly get the names and descriptions of Product Groups, and also some plugins references. (JD)
+    - Updated WHMCS importer to properly import registrar synergywholesaledomains as synergywholesale. (JD)
+    - Updated WHMCS importer to also import users passwords. (JD)
+    - Updated WHMCS importer to also import: Invoice Transactions, Emails History for each client, adds a note with the original Invoice ID in the imported invoices, import clients Credit Balance and Credit History. (JD)
+    - Fixed more issues with "groups" being a reserved keyword in MySQL 8.0. (JD)
+    - Fixed "State" not being properly set when creating a client from importing a domain. (MG)
+    - Fixed issue with a user not being set for auto payment when they manually register an account. (MG)
+    - Show a better database connection error during installation. (MG)
+    - When passing the username to the SMTP server, ensure we trim() the username. (MG)
+    - Fixed WHMCS importer to import Virtualizor VPS Id. (JD)
+    - Fixed issue with MySQL 8.0 and password migrations. (MG)
+    - Fixed issue with client side redirects when coming to a link that requires the user to be logged in. (MG)
+    - Added new public location hook: clientarea_all that gets triggered at the top of each client area page. (MG)
+    - Direct Link should link to step 2. (MG)
+    - Added the ability to set custom from name and email addresses to auto mailer/notifications. (MG)
+    - Fixed a wrong variable name inside the InvoicepublicController functions. Should be $invoiceid instead of $invoice_id. (JD)
+    - Increased the max length of an email address. (MG)
+    - Added missing translations on invoice page, and signup. (MG)
+    - Updated password generation code to generate better passwords. (MG)
+    - Allow get user packages API call (/api/v2/clients/packages/getpackages/type=?&customerId=?) (MG)
+
+* Clients
+    - Removed the secondary sub-heading on client main page for the bottom content lists (Announcements, FAQs, Popular Articles). (MG)
+    - Allow pending clients to reset their password. (MG)
+    - Fixed issue loading package page on client side if the domain does not have a billing cycle / recurring amount. (MG)
+    - Fixed style issue with recurring amount on client side package page. (MG)
+    - Display the current due date of a package instead of the next if the package is not paid. (MG)
+    - Ensure "Read Only" fields are not disabled on client registration page. (MG)
+    - Updated host record field to not be required when editing DNS records. (MG)
+    - Moved "Actions" to "Quick Actions" side bar menu on client package pages. (MG)
+    - Ensure "External VPS/Package ID" is always displayed on the hosting account tab of a client's package. (MG)
+    - Fixed issue that was preventing custom public package panels to be displayed properly. (MG)
+
+* Billing
+    - Updated note in the invoice when doing a package upgrade/downgrade, indicating the previous and new package names and billing cycles. (JD)
+    - Fixed issue causing an Invoice to be deleted when editing it by completely deleting all the current Invoice Entries and adding new ones. (JD)
+    - Added option to set time for manually added payments on invoices. (JD)
+    - Fixed issue that was adding credit balance to the client when adding a manual payment to an invoice and there was a very small difference between the amount due and the payment values. (JD)
+    - Fixed issue related to javascript subtraction issues causing to miscalculate tax values when editing an invoice. (JD)
+    - Updated the message displayed to clients when there was an error processing an invoice, for them to contact the company if the issue persists. (JD)
+    - Fixed issue with coupons expiring before completing their usage. (JD)
+    - Added new setting "Delete Client From Gateway" on Stripe and Stripe Checkout payment plugins to determine if delete the client from the gateway when the client changes the payment method or is deleted. (JD)
+    - Fixed issue with Mass Pay that was allowing to merge any invoices, ignoring their status or if they were a subscription. (JD)
+    - Update Switzerland to use VAT. (JD)
+    - Replaced General Billing Setting 'Void Unpaid Invoices When Deleting A Package' with multiselect setting 'Void Unpaid Invoices' to be able to void unpaid invoices when deleting or canceling a package. (JD)
+
+* Signup
+    - Allow to pre-set custom field values when linking to the order page. For example, if using the Softaculous auto-installer you can use: order.php?cf_script=wordpress. (MG)
+    - Ensure addon one-time fees properly show in cart summary, even if hide setup fees is turned on. (MG)
+    - Fixed issue with still showing invalid products in cart summary on step 3 when they have been removed from the cart (bundled product with no domain). (MG)
+    - Fixed issue with "Leaving now will cancel this item.  Are you sure you want to leave?" popup not letting the user cancel. (MG)
+    - Fixed validation issue on sign up when using a longer TLD when "use my own domain" is selected. (MG)
+    - Fixed "validate_vat is not defined" error on cart step 3 when using CloudFlare. (MG)
+    - Do not show transfer checklist for UK domains. (MG)
+    - Added com.bn, edu.bn, gov.bn, net.bn, org.bn and .bn TLD lookups when not using a registrar plugin. (MG)
+    - Added mk, com.mk, org.mk, info.mk, net.mk and edu.mk TLD lookups when not using a registrar plugin. (MG)
+    - Added product name and product description to step 2 of sign up. (MG)
+    - Avoid displaying a dot to separate decimals in the prices displayed on the Compare view in the signup section, if there are actually no decimals to be displayed. (JD)
+    - Added a setting in Settings > Products > Order Pages > No Invoice, to avoid generating invoices when placing a free order (Total Amount 0). (JD)
+    - Ensure PayPal checkout does not cause duplicate transactions when captcha fails. (MG)
+    - Ensure sign up submit button has cursor pointer. (MG)
+    - Fixed price size and format in compare view. (JD/MG)
+    - Ensure premium domains do not show as available from eNom until we fully support premium domains. (MG)
+
+* Plugins
+    - Add update functionality to Virtualizor. (MG)
+    - Update StripeCheckout to the latest version of API. (MG)
+    - Added Mollie Payments Plugin, thanks to intio.nl. (MG)
+    - Updated Stripe Checkout to ensure Client Name and Address are properly stored in Stripe. (JD)
+    - Fixed issue with Square Payment expecting an integer value for amount. (JD)
+    - Fixed issues in payment plugins that were trying to use unavailable parameters when trying to place a new order while being logged in as client. (JD)
+    - Fixed importing domains failing with Synergywholesale. (MG)
+    - Fixed org.za TLD lookups when not using a registrar plugin. (MG)
+    - Fixed issue with TeamStatus Notifier Service and MySQL 8.0. (MG)
+    - Fixed issue with ResellerClub/NetEarthOne/ResellBiz not properly identifying when a domain transfer has completed. (MG)
+    - Fixed display issue with Square Payment fields. (MG)
+    - Fixed sending ClientIp to NameCheap, it should be the server IP, not the web user IP. (MG)
+    - Fixed issue with eNom marking domains as cancelled when cURL times out resolving the host. (MG)
+    - Updated Stripe Integration to Stripe Elements (replacing the legacy Stripe integration). (JD)
+    - Square Payment plugin will now try to prefill the postal code. (JD)
+    - Fixed issue with importing domains from OpenSRS. (MG)
+    - Updated PayPal plugin to use image_url and stop using page_style. (JD)
+    - Updated PayPal plugin to use https://www.paypal.com/sdk/js. (JD)
+    - Updated 2Checkout plugin to ignore duplicated transactions, instead of marking them as fraud. (JD)
+    - Added 20i.com Server Plugin. (MG)
+    - ApisCP Usernames should always be lowercase. (MG)
+    - Added new CyberPanel Server Plugin. (MG)
+    - Added Nominet Registrar Plugin. (MG)
+    - Added VirtFusion Direct Server Plugin. (MG)
+    - Added new Pterodactyl Server Plugin. (MG)
+    - Fixed issue with Virtualmin not updating the username when we validate it (lower case, etc). (MG)
+    - Fixed issue when Vultr fails to create a VM, and show a proper error message. (MG)
+    - Fixed issue with HTML showing in the ticket message when a ticket is auto closed. (MG)
+    - Added additional phone number validation to eNom Reseller Account Creation Snapin. (MG)
+    - Added new SSO Standard Ports Setting for Virtualizor, so SSO can be on port 443 instead of 4083. (MG)
+
+* Support
+    - Fixed issue with the display of ticket status alias names in ticket list on client area. (MG)
+    - Fixed issue preventing clients from seeing the "Submit Reply" button on support ticket unless "Allow Customer File Uploads" was enabled. (MG)
+    - Fixed text overflow issue in support ticket messages on client and admin UI. (MG)
+    - Support Emails "From" will now also show the Company Name. (JD)
+    - Emails sent by the "Ticket Auto Close" automation service plugin will now also make use of the "Ticket Number Prefix". (JD)
+    - Emails sent by the "Ticket Auto Close" automation service plugin now use HTML (<br>) for new lines. (JD)
+    - Fixed issue causing a blank page under certain routing rule configuration when a guest user was trying to open a support ticket. (JD)
+    - Fixed issue with parsing emails that contained inline image attachments.
+    - Fixed formatting issue when editing a suppor ticket message. (MG)
+
+* Knowledgebase
+    - Fixed display of OL's and UL's in knowledgebase articles. (MG)
+    - Ensure members only KB articles show properly. (MG)
+    - Ensure the article count is displayed properly. (MG)
+
+================================================================================================================
+================================================================================================================
+
+6.4.2
+* System / Admin
+    - Do not hide the top header when you scroll anymore. (MG)
+    - Fixed display issue of the color picker on Add/Edit Client Group. (MG)
+    - New installs now default "Shared Web Hosting" to "compare/modern" style. (MG)
+    - Fixed the ' character not displaying properly in the success message in admin when resetting a client's password. (MG)
+    - Ensure the "Allow Registration" setting is properly checked. (MG)
+    - Fixed how amount coupon displays the amount when editing a coupon configuration. (JD)
+    - Fixed WHMCS importer to properly import admin responses from support tickets. (JD)
+    - Updated WHMCS importer to display connection errors. (JD)
+    - Show a better error message when testing mail configuration. (MG)
+    - Ensure events are properly triggered when called from cron. (MG)
+
+* Clients
+    - Fixed display issue on product page with very long custom field values.  Values >= 25 will now open in a modal box. (MG)
+    - Fixed display issue on product page improperly showing HTML currency codes. (MG)
+    - Fixed issue with iframe payment plugins not properly showing the iframe on edit payment method (QuantumVault, AuthnetCIM, etc). (MG)
+    - Fixed multiple Upgrade/Downgrade actions showing on products action list. (MG)
+    - Only show action cogwheel if there are actions to be taken on products list. (MG)
+    - Added missing translations. (MG)
+    - Fix issue with CloudFlare Rocket Loader and the new client UI. (MG)
+    - Added sub-page header to login page. (MG)
+    - Fixed padding on domain page, select cart steps section. (MG)
+    - Fixed permission checking in dashboard side menu for "Edit Profile". (MG)
+    - Fixed permission checking in top user menu for "Change Password". Change password will always show, even if edit customer profile permission is turned off. (MG)
+    - Fixed extra </div> in article.phtml
+    - Added actions column to dashboard packages list. (MG)
+    - Fixed issue displaying wrong addon data to clients. (JD)
+    - Fixed how "Read Only" works for "User Custom Fields" in Signup and Customer Profile. (JD)
+
+* Billing
+    - Fixed issue preventing search from working on all invoices client page. (MG)
+    - Fixed issue preventing all invoices to display if an invoice existed for a package that was deleted. (MG)
+    - Fix issue when trying to create a Paypal Subscription with an invoice that only has items using Custom Billing Types and having different Billing Cycles. (JD)
+
+* Plugins
+    - Fixed issue preventing DirectAdmin Direct Login from working. (MG)
+    - Ensure the domain name is shown in the error message when a domain does not exist anymore at ResellerClub. (MG)
+    - Ensure username is all lowercase when sending to DirectAdmin. (MG)
+    - Fixed issue with case sensitive checking in Softaculous AutoInstall when not using a script. (MG)
+
+* Signup
+    - Added new setting 'Monthly Price Breakdown'. Select this option to display the monthly price breakdown for each billing cycle on the billing cycle selector of the cart. For example: 1 Year: $9.95/mo. Does not apply to Domain products. (JD)
+    - Added new setting 'Show Discounted Pricing in Billing Cycle Selector'. Select this option to show the discounted price when an Automatic Coupon has been associated to a Product. For example: $49.95 / 1 Year (Normally: $99.95 / 1 Year). (JD)
+    - Removed an extra </div> that should not have been there. (MG)
+    - Ensure custom fields show their descriptions. (MG)
+    - Fixed how the percentage amount is displayed for coupons in signup. (JD)
+    - Fixed how "Coupon Applies to" is displayed for percentage coupons in signup. (JD)
+    - Fixed issue with coupon code not applying after changing the billing cycle on step 2. (MG)
+    - Fixed style issue with Discount in cart summary when discount is an amount discount. (MG)
+
+================================================================================================================
+================================================================================================================
+
+6.4.1
+* System / Admin
+    - WHMCS importer need to verify if the table tblpaymethods exist. (JD)
+    - Fixed issue with upgrade not properly deleting old sign up files, causing broken sign up. (MG)
+    - Fixed Canned Response list sorting by creator (MG)
+
+================================================================================================================
+================================================================================================================
+
+6.4.0
+* System / Admin
+    - Fixed issue storing thousands separator when importing TLD prices. (JD)
+    - Fixed issue with admin menu not re-loading when a snapin is enabled or disabled. (MG)
+    - Fixed issue with remote installs (softaculous, installatron, etc) not properly checking for trial licenses. (MG)
+    - Fixed issue with domain list not showing properly when using MySQL 8.0. (MG)
+    - Ensure that the "Renew Package" permission displays properly for client groups. (MG)
+    - Fixed issue related to package upgrade/downgrade code not allowing to complete Clientexec updates. (JD)
+    - Fixed issue related to custom billing cycles code not allowing to complete Clientexec updates. (JD)
+    - Always show "VPS ID" under Hosting Account Tab of a client's package if there is one set. (MG)
+    - Added a new config.php option "SAMEORIGIN" to send the X-FRAME-OPTIONS sameorigin header. (MG)
+    - Fixed issue with checking the wrong java script variable in our chat tracking. (MG)
+    - Added SOAP as a required PHP extension. (MG)
+    - Fixed issue on sign up with not being able to determine the proper server to allocate a package to. (MG)
+    - Added ability to cancel a pending package upgrade/downgrade for admin and also for client. (JD)
+    - Ensure that auto-generated usernames based on a domain name do not start with a number. (MG)
+    - Updated API invoice to return the invoice entries info. (JD)
+    - Fixed placement of Trial Version and Execution Time in admin footer. (MG)
+    - Fixed issue with test email when using the "Override From" setting.
+    - Allow admins to change a package status to any other when needed. (JD)
+    - Allow to configure and use Upgrade/Downgrade for the same product, allowing a client to reconfigure the addons for the package and prorating the differences. (JD)
+    - Fixed issue with test email when using the "Override From" setting. (MG)
+    - Fixed issue with looking up .CH, .DE, and .EU domains when not using a registrar plugin. (MG)
+    - Updated Client UI to new design and based on Bootstrap 4. (MG)
+    - Significantly improved WHMCS migrator. (JD)
+    - Fixed issue that was causing too many license checks, thus invalidating a license when it still had a grace period. (MG)
+    - When saving free subdomains for a product, strip out any leading '.'. (MG)
+    - Send "Account Creation" email from support email, not billing email. (MG)
+    - Fixed issue with displaying the staff list when using MySQL 8.0+. (MG)
+    - New Installs now default "Prompt for domain username and password" to no. (MG)
+    - Fixed issue when looking up any .PE TLD when not using a registrar plugin. (MG)
+
+* Billing
+    - Added new General Billing Setting: Void Unpaid Invoices When Deleting A Package. Select YES if you want to void any unpaid invoice associated with a package when it is deleted. If the invoice has additional invoice entries not associated with the package, a new unpaid invoice will be generated with those invoice entries. (JD)
+    - Make sure when setting a package to have billing cycle as One Time, or recurring as No, to properly update the recurring fee paymentterm value to 0. (JD)
+    - Fixed issue when calculating the total of an invoice for some currencies while having a percentage discount entry on it. (JD)
+    - Allow to Delete invoice entries of type Coupon. (JD)
+    - Fixed bug that was not removing invoice entries of unused coupons from invoices. (JD)
+    - Fixed issue with PDFInvoice setting wrong cache path. (MG)
+    - Added UK HMRC VAT Validation. (JD)
+    - Added missing events about adding/removing credit balance when: applying credit to an invoice, getting credit from an overpaid invoice, or when crediting an invoice. (JD)
+    - Display 'Failed Reason' by default in 'Failed Invoices' section. (JD)
+    - Added note in the invoice when doing a package upgrade/downgrade, indicating the previous and new package names and billing cycles. (JD)
+
+* Plugins
+    - Allow Direct Links payments for Paypal properly work with the new API. (JD)
+    - Fixed issue with Stripe Checkout trying to insert invalid failed transactions when the client clicks the "Back" link instead of completing the payment. (JD)
+    - Ensure the Create option is properly displayed for Virtualizor when the VPS has been manually removed from the server.
+    - Allow NameSilo to use ID Protect addon. (MG)
+    - New "Auto Renew Domains?" setting for NameSilo to determine if the auto renew should be enabled at NameSilo (default to no so CE handles auto renews). (MG)
+    - Fixed DNS Record management with NameSilo. (MG)
+    - Show EPP Code for ResellerClub, Resellbiz & NetEarthOne domains. (MG)
+    - Fixed issue with Virtualizor plugin not sending proper virtualization param. (MG)
+    - Allow Virtualizor plugin to send the storage ID when creating a VPS. (MG)
+    - Update the order of Stripe Checkout keys so they match the order in Stripe dashboard. (MG)
+    - Added Direct Login support for DirectAdmin. (MG)
+    - Added new DreamScape Registrar Plugin. (MG)
+    - Ensure Stripe Checkout works while using CloudFlare. (MG)
+    - If Auto Mailer is unable to email a client, create a support ticket instead. (JD)
+    - Fixed issue causing invoice page to show blank when a Stripe account has been limited. (MG)
+    - When importing cPanel/WHM accounts, send a reset password email if we create a new client (MG)
+    - Updated softaculous auto installer to use 'admin' as the admin username if none is given. (MG)
+
+* Reports
+    - New report: Client Group Income. Displays total paid by Client Group. (JD)
+    - Fixed issue with "Income Growth" Report and MySQL 8.0. (JD)
+    - Fixed issue in the "Upcoming Charges" and "Predicted Income" reports when comparing a date field against 'NULL'. (JD)
+
+* Signup
+    - Fixed issue when using the GET parameter "paymentTerm" instead of "paymentterm" in sign up. Now both parameters work. (JD)
+    - Fixed issue with "Terms and Conditions URL" setting, when used in the section where you can create an account without ordering. (JD)
+
+* Clients
+    - Renamed country "Macedonia (Frm. Yugoslav Rep.)" to "North Macedonia". (JD)
+    - Ensure "Use Paypal Subscriptions" is properly set when an account is created from login page. (MG)
+
+* Support
+    - Fixed issue preventing spam filters from being saved as enabled. (MG)
+    - Fixed issue with editing a ticket message on admin showing raw HTML. (MG)
+    - Allow to edit all system ticket types. (JD)
+    - When emailing an Announcement, now it replaces the images URLs, with full paths. (JD)
+
+================================================================================================================
+================================================================================================================
+
+6.3.0
+* System / Admin
+    - Added new feature "Prepend Username to Package Name on Server" to a server, which will add the server's username before the package name on server. (MG)
+    - When parsing a pop3 email, do not use the Delivered-To header, as this could be an internal email address. (MG)
+    - Added a new language translation for Mexican Spanish (MG)
+    - Added "Auto-Renew Ticket Assign To" setting for "Auto-Renew Domain". (JD)
+    - Added "Override From" setting to force the from address when sending out any emails. (MG)
+    - Added Softaculous Auto Installer for cPanel. (MG)
+    - Fixed issue with "groups" being a reserved keyword in MySQL 8.0
+    - Added "My Notes" to admin profile menu. (MG)
+    - When importing TLDs, set the sign up order incrementally. (MG)
+    - Domains list now properly shows expiration date, and renewal date. (MG)
+    - Added cancel packages button to pending orders list. (MG)
+    - Moved "Routing Filters" to their own view (Settings -> Support -> Spam Filters) (MG)
+    - Added new feature to allow clients to upgrade or downgrade packages. (JD)
+    - Fixed issue with Ticket-ReplyByAdmin and Ticket-ReplyByCustomer events not triggering properly for emails. (MG)
+    - Fixed issue with an update query failing when updating/adding addons to products. (JD)
+    - Updated Domain List and SSL List under Accounts menu to use the recurring fee next due date when there is no correct plugin date on the database to show. Also, filters related to the expiration date also use that date when required. (JD)
+    - Ensure that the Package Upgrade / Downgrade permission is applied to default groups on new installation. (MG)
+    - Fixed issue with admin domain name name servers and host records tab locking up on admin side. (MG)
+    - Updated Get Product API response to include a signup_price key, which takes into account any automatic coupon. (JD)
+
+* Billing
+    - Moved credit card viewing to a RichHTML window. (MG)
+    - Allowed to use the tag [DIRECTPAYMENTLINK] in Settings > Billing > Invoices > Additional Notes For Invoices. (JD)
+    - Show available Credit Balance in the Apply My Credit button for clients. (JD)
+    - Added a "Paid Invoice" filter to invoices list. (MG)
+    - Added small fix to calculate invoice totals when there is a percentage discount. (JD)
+    - Tax rates now display a properly formatted percentage value. (JD)
+    - Fixed issue with admin invoice list showing all invoices when on a client's profile invoice list. (MG)
+    - Fixed an issue that was allowing duplicated transactions with PayPal. (JD)
+
+* Plugins
+    - Add new setting to DomainNameAPI for default name servers. (MG)
+    - Updated DomainNameAPI Plugin to force SOAP connection type. (MG)
+    - Updated Authorize.Net plugin to round the amount to 2 decimals, to avoid issues about a difference of 1 cent when paying. (JD)
+    - When cancelling a PayPal Subscription, if it fails due to the subscription code is not found, assume it was already canceled and remove the subscription id from the recurring fees and unpaid invoices. (JD)
+    - Fixed issue with Name.com and premium domains. (MG)
+    - Added a new setting in the Authorize.Net CIM payment plugin to "Disable validate client Authnet CIM payment profile". Select YES if you want to avoid Authorize.Net CIM to validate the client Authnet CIM payment profile on every transaction. This will also stop Authorize.Net CIM sending some emails about validation transactions. (JD)
+    - Removed obsolete HipChat Status Updater Service. (MG)
+    - Removed obsolete WHMPHP Server Plugin. (MG)
+    - Allow a staff member to login to a client's SolusVM Panel. (MG)
+    - Added test connection functionality to DirectAdmin. (MG)
+    - Ensure DomainNameAPI shows Supported Features. (MG)
+    - Added ApisCP Server Plugin. (MG)
+    - Added GoGetSSL SSL Plugin. (MG)
+    - Add new Vultr Server Plugin. (MG)
+    - Updated eNom plugin to use https when using test server. (MG)
+    - Updated the domain updater service to continue processing domains during a connection issue, and report which domains had the connection issue in the summary email. (MG)
+    - Fixed bug with sending name servers when registering a domain with NameSilo. (MG)
+    - Updated Joker.com registrar plugin from Joker.com Developers. (MG)
+    - Added Reseller support to Interworx. (MG)
+    - Added new service to handle package upgrades or downgrades. (JD)
+    - Updated Stripe Checkout to work with Stripe API 2020-08-27 no longer sending display_items. (MG)
+    - Fixed issue with NameSilo Plugin canceling domains with domain updater service, when the IP is not allowed to connect to API. (MG)
+    - Removed un-needed BuycPanel plugin. (MG)
+    - Fixed bug with GoGetSSL Plugin not sending the proper product_id (MG)
+
+* Reports
+    - Fixed Ticket Totals report, to properly work with different date formats. (JD)
+
+* Signup
+    - Allowed to use Percentage Coupons on Prorated Orders.
+    - Updated the way a package is allocated to a server at sign up, to pick the least full available server. (MG)
+    - Open a support ticket if all servers are full, and the package can not be allocated to a server. (MG)
+    - Reformulated how billing cycles based on years are compared against billing cycles based on days. (JD)
+    - Fixed bug with always showing default style for product when accessing order.php with no params. (MG)
+    - Fixed issue with always displaying saved percentage on compare style, even if the setting is off. (MG)
+    - Fixed styling issue with compare style and pricing list. (MG)
+    - Fixed TLD lookup for .ac.ke, .co.ke, .go.ke, .ne.ke, .or.ke, and .sc.ke when not using a registrar. (MG)
+    - Added TLD lookup support for .ke, .mobi.ke, me.ke and info.ke TLDs when not using a registrar. (MG)
+    - Fixed issue when look ups if there is a trailing space in the name. (MG)
+    - Fixed display issue with transfer check list. (MG)
+    - Fixed issue with compare sign up style not showing the proper price when sending the payment term in the URL. (MG)
+    - Disable 'Continue' button on signup default style when a product is out of stock. (JD)
+    - Fixed TLD lookup for .ie when not using a registrar. (MG)
+
+* Clients
+    - Fixed datatables error alert when trying to sort with next due date on client side products list. (MG)
+    - Ensure that the "View/Send Transfer Key" permission is properly checked on client side. (MG)
+    - Ensure that the EPP Code shows on Domain Information tab for transfers that have not completed or started. (MG)
+    - Ensure that new lines are properly displayed in a server's status message on client dashboard. (MG)
+    - Show the SSL Certificate on client side SSL Info tab if available. (MG)
+
+* Support
+    - Fixed issue sending duplicated emails when a client used the same email but with different uppercase or lowercase characters in the email address. (JD)
+    - Fixed countable warning in EmailGateway.php (MG)
+    - Cleaned up the CannedResponse Model to not use Zend. (MG)
+
+================================================================================================================
+================================================================================================================
+
+6.2.1
+* System / Admin
+    - Fixed issue when adding a new addon to a product configuration. (JD)
+
+================================================================================================================
+================================================================================================================
+
+6.2.0
+* System / Admin
+    - Added Last Reply to Ticket List on Admin Dashboard. (MG)
+    - Updated invoices grid to also display and order by Date Created. (JD)
+    - Updated the temp/cache path for mPDF to be uploads/cache. (MG)
+    - When parsing an email, if the from address is invalid, check the return-path header. (MG)
+    - Attempt to disable MySQL Strict Mode. (MG)
+    - Trim whitespace from a servers hostname and shared IP upon saving. (MG)
+    - Ensure the reports menu is sorted alphabetically. (MG)
+    - Fixed issue with full client data export if an invoice entry referenced a user package that did not exist. (MG)
+    - Fixed issue with saving/display plugin options under Advanced & Plugin Settings of a product. (MG)
+    - Invalidate opcache of certain installer files during installation. (MG)
+    - Attempt to activate a 30 day free trial on installation if no license exists. (MG)
+    - Updated client side bootstrap version to 3.4.1. (MG)
+
+* Billing
+    - Added new admin permission to "Manage billing cycles". (JD)
+    - Added new "Billing Cycles" section under billing settings, to allow add, edit and delete billing cycles. (JD)
+    - Display invoice entries description and detail with the updated names of the product and product group. (JD)
+    - Updated credit management in admin to allow for better tracking of client credit. (MG)
+    - Fixed issue when adding an invoice entry that is not using a dot as a decimal separator, causing the price to be different than expected. (JD)
+    - Added a button to manually set an invoice to "Pending" status in the invoices grid. (JD)
+    - Updated Mass Pay button to be able to work even when only 1 invoice is selected. (JD)
+
+* Knowledgebase
+    - Added the ability to have meta keywords and description in KB articles. (MG)
+
+* Plugins
+    - Added TLD & Pricing import to NetEarthOne plugin (MG)
+    - Added TLD & Pricing import to Resell.biz plugin (MG)
+    - Added getting and setting DNS records to NetEarthOne plugin (MG)
+    - Added getting and setting DNS records to Resell.biz plugin (MG)
+    - Added TLD & Pricing Import to NameSilo. (MG)
+    - Updated Paypal plugin to handle the transaction types: recurring_payment and express_checkout. (JD)
+    - Fixed issue with URL encoding cPanel password on account creation. (MG)
+    - Show a proper error message if trying to connect to cPanel Server with an invalid hostname. (MG)
+    - Added description to Stripe Checkout payments. (JD)
+    - Fixed Paystack gateway plugin, that now requires to also send the currency code. (JD)
+    - Ensure domains are not cancelled if cURL can not resolve the API host of the registrar. (MG)
+    - Updated Paypal plugin to avoid trying to create subscriptions greater than 1 year when using the new API, as it is currently restricted to 1 year or less. (JD)
+
+* Reports
+    - Fixed bug with Monthly Income By Type Report causing a non-numeric value error. (MG)
+    - Fixed bug with Predicted Income Report causing a non-numeric value error. (MG)
+    - Fixed bug with Upcoming Charges Report causing a non-numeric value error. (MG)
+
+* Signup
+    - Added new setting to block certain phrases from being allowed in domain registrations / transfers. (MG)
+    - Allow coupon code to be sent to sign up with the GET parameter couponCode. (JD)
+    - Allow billing cycle to be sent to sign up with the GET parameter paymentterm, using either the billing cycle id, or a value representing the billing cycle. In Example, 15 days can be either 15d or d15, 1 week can be either 1w or w1, 3 months can be either 3m or m3, 2 years can be either 2y or y2. (JD)
+
+* Clients
+    - Added captcha to client side Reset Password. (MG)
+    - Added the ability to cancel packages from a client's profile packages list. (MG)
+    - Updated login page HTML to allow for custom css padding/margin on "Don't have an account? Register now" and "Forgot your password" (MG)
+
+* Support
+    - Added new admin preference to allow the support ticket list to auto refresh. (MG)
+    - Ensure custom fields are available to clients at all times when viewing a support ticket. (MG)
+
+================================================================================================================
+================================================================================================================
+
+6.1.1
+* System / Admin
+    - Ensure that FreeSerif fonts are included in new builds. (MG)
+    - Ensure cookie_secure is set for https connections (MG)
+    - Fixed minor XSS in admin ticket search. (MG)
+
+* Plugins
+    - Updated the Auto Suspend / Unsuspend plugin to avoid unsuspending packages having Override Auto Suspend enabled. (JD)
+    - Fixed issue with "Login to cPanel" link in admin only showing after a refresh. (MG)
+    - Added description to Stripe Checkout payments. (JD)
+
+* Reports
+    - Updated Income Growth SQL query to not break in strict mode. (MG)
+    - Fixed bug with Monthly Income Report causing a non-numeric value error. (MG)
+
+* Clients
+    - Adding missing translation to product type in client area (JD)
+
+================================================================================================================
+================================================================================================================
+
+6.1.0
+* System / Admin
+    - Ensure the IPv4 address is shown on the registrar settings page. (MG)
+    - Updated email history to include the from email and name. (MG)
+    - Added email history to a client's profile in admin. (MG)
+    - Fixed issue with pclzip library and a non-numeric value. (MG)
+    - Added a very basic TLD Importer for eNom TLDs. (MG)
+    - Added TLD and group id to error message log when a domain is looked up for a TLD that is not currently supported. (MG)
+    - Added new hook for "Service-AutoSuspend-Suspend" and "Service-AutoSuspend-UnSuspend". (MG)
+    - Re-added JavaScript & CSS sources to allow loading from local instead of CDN. (MG)
+    - Fixed issue that was not displaying active SSL packages if they were missing the 'Certificate Expiration Date' value. (JD)
+    - Added biz.id TLD to supported TLDs when not using a registrar. (MG)
+    - Add billing update to Add/Edit UserPackage API. (MG)
+    - Fixed issue preventing only top menu mapping in snapins to work. (MG)
+    - Ensure that a staff member has manage KB permission before updating the order of KB articles. (MG)
+    - Fixed an issue with displaying the addon name when editing an addon if the addon was not assigned to any products. (MG)
+    - Updated our reCAPTCHA to use cURL instead of sockets (MG)
+    - Fixed issue with sign up not changing an inactive client to pending when an inactive client signs up for a new package. (MG)
+    - Added ec TLD to supported TLDs when not using a registrar. (MG)
+    - Added ability to report chargebacked invoices to MaxMind. (MG)
+
+* Plugins
+    - Added new PayFast Payment Gateway (Development sponsored by GamingEvolved.co.za). (MG)
+    - Updated MaxMind to use their new services (Score, Insights, Factors). (MG)
+    - Removed high risk country order denies from MaxMind, as they no longer support this. (MG)
+    - Allow cPanel reseller packages to Login to cPanel & Login to WHM. (MG)
+    - Added new package variable to cPanel reseller packages, to determine if the reseller should own itself. (MG)
+    - Added new Square Payment Gateway. (JD)
+    - Remove an un-needed & at the end of the ResellerClub URL string. (MG)
+    - Fixed undefined supports function in SSLPlugin.php
+    - Fixed some issues that were not allowing the Auto Suspend / Unsuspend plugin to notify about packages needing unsuspension. (JD)
+    - Avoid creating Paypal Subscriptions when there are multiple invoice entries for the same item, or the invoice entries start in different periods. (JD)
+    - Added new Virtualizor Server Plugin. (MG)
+    - Added the ability to use htpasswd user/pass when connecting to a SolusVM server. (MG)
+    - Add Name Suggest, Import Domains, and Import Prices as features of RegistrarPlugins. (MG)
+    - Deprecated the use of ICanImportDomains interface in favor of supports() method in RegistrarPlugin (MG)
+    - Removed "Authorize.Net CIM Validation Mode" setting and forced to be always in test mode to avoid creating unwanted testing transactions. (JD)
+    - Removed dead gateway plugin InternetSecure. (MG)
+    - Do not start transfer if no epp code for ResellerClub. (MG)
+    - Do not cancel ResellerClub domains when their API returns an unexpected error. (MG)
+    - No longer check if a cPanel package name is valid, instead let their API return an error. (MG)
+    - Added new registrar plugin for Joker.com (MG)
+
+* Reports
+    - Added Transactions By Month report. (JD)
+
+* Billing
+    - Fixed issue with monthly invoice display on default invoice when Date Format is "dd/mm/yyyy". (MG)
+    - PDF invoices will now always be displayed as a VAT invoice if the default country is part of the European Union and there are Tax Rules configured as VAT, or if the client is under a Tax Rule that uses VAT. (JD)
+    - Removed "Generate Next Recurring Invoice" button from "Invoices" tab and added "Generate Next Invoice" button in "Packages" tab. (JD)
+    - Added new Billing Setting "Generate Invoices Per Package" to allow you to determine if when generating recurring invoices, to separate the packages in different invoices if possible. Subscriptions will not be separated. (JD)
+    - Fixed some invoice translations. (JD)
+
+* Clients
+    - Added new validations when merging users to make sure everything was properly merged, or abort before deleting the old user. (JD)
+    - Fixed issue with sorting products via next due date not sorting properly. (GM)
+
+================================================================================================================
+================================================================================================================
+
+6.0.2
+* System / Admin
+    - Fixed issue with Account-Login event only sending userid 0. (MG)
+
+* Billing
+    - Always allow sending Invoices by email, no matter their status. (JD)
+
+* Plugins
+    - Fixed possible issue with creating cPanel accounts. (MG)
+    - Properly terminate cPanel reseller accounts. (MG)
+    - Fixed issue with Stripe Checkout plugin not been able to display the Pay button to pay an invoice. (JD)
+
+================================================================================================================
+================================================================================================================
+
+6.0.1
+* Signup
+    - Fixed issue preventing bundled packages from completing on sign up. (JD)
+
+* Plugins
+    - Show better error messages when testing connection for cPanel servers. (MG)
+    - Fixed possible error when PayPal sends a callback we weren't expecting. (JD)
+
+* System / Admin
+    - Added Account-Login event. (MG)
+    - Added type (client, staff) parameter to Account-Logoff event. (MG)
+    - Fixed issue that was preventing plugin dropdown from showing for domain packages on admin. (MG)
+    - Increased field length for some chat visitor fields. (MG)
+    - Ensure style.css is deleted from default invoice template during automatic update. (MG)
+
+================================================================================================================
+================================================================================================================
+
+6.0.0
+* System / Admin
+    - Ensure we trim any whitespace when saving an email address. (MG)
+    - Allow a staff member who has the "Edit Nameserver" permission, but not the "Edit Packages" permission to still update name servers for a package. (MG)
+    - Fix possible issue with SEO rewrites when no directory is used for CE. (MG)
+    - Fixed permission for View As Customer. (JD)
+    - Fixed possible overflow issue with the avatar image in the right hand active client panel. (MG)
+    - Fixed issue with external domain checking case sensitivity. (MG)
+    - Fixed issue with API GET /accounts/user/ resource. (MG)
+    - Added the ability to "pin" an announcement, to sort by this first. (MG)
+    - Fixed issue preventing new language definitions from getting added to language files. (MG)
+    - Ensure Riyaz fonts are included for PDF generation. (MG)
+    - Updated the Add / Edit Billing Type window to be more user friendly (MG)
+
+* Support
+    - Fixed issues with TicketNotifications not defined in some functions of TicketGateway. (JD)
+    - Fixed issue that was sending duplicate email notifications when an admin replies to a support ticket. (JD)
+
+* Clients
+    - Fixed bug preventing "Alternate Accounts" and "Account Notes" from showing on client side menu when "Edit Customer Profile" permission was disabled (MG)
+    - Fixed possible issue on client side name server view when a domain isn't registered. (MG)
+    - Fixed a countable error in UserPackageGateway.php (MG)
+    - Added the ability to Login to cPanel from admin view of user package. (MG)
+    - Ensure "Order New Services" is always available from the Packages top menu on client side. (MG)
+    - Ensure we do not attempt to delete gateway data when the user is only a guest. (MG)
+    - Fixed issue allowing clients to view any announcement even when the client was not part of the Audience. (JD)
+    - Fixed issue with OnlineNic and host records page. (MG)
+
+* Billing
+    - Only use the "Credit Card Invoice Template" if the invoice has all its packages configured to "Charge CC Automatically". (JD)
+    - Increased width of transaction id column on transactions list. (MG)
+    - Added new default invoice template (current clients on default will be changed to default-old). (MW, MG)
+
+* Plugins
+    - Fixed issues in Paypal, Razorpay, and Stripe Checkout gateway plugins that were not properly validating the Password Strength in Signup. (JD)
+    - Fixed Client Data CSV Exporter to avoid issues with some field names. (JD)
+    - Updated Invoice Data CSV Exporter to include every tax amount charged, Country, State and City. (JD)
+    - Added new HostingController Server Plugin for websites (Development sponsored by Elinkworld.com). (MG)
+    - Fixed possible issue when parsing XML from OpenSRS that isn't always in the same format. (MG)
+    - Fixed issue in Paypal plugin that was in some cases not properly setting the related recurring fees to be under a Paypal Subscription. (JD)
+    - Updated Stripe Checkout to support Strong Customer Authentication (SCA) and 3D Secure 2. (JD)
+    - Updated FraudLabsPro Fraud plugin to use their PHP SDK and new device tracking javascript. (MG)
+    - Added new CentOS Web Panel / CWP server plugin .(MG)
+    - Updated the API function we call when testing cPanel servers to be list packages instead of version. (MG)
+    - Fixed FraudLabsPro fraud error message to only show a generic message. (MG)
+    - Fixed issue with FTP backup calling undefined function. (MG)
+    - Ensure ExtendedAttributes are sent during domain transfer with eNom. (MG)
+    - Fixed issue with Stripe Checkout causing an error on invoice payment page. (MG)
+    - Added new Payment gateway for pesapal.com (MG)
+
+* Reports
+    - Fixed Ticket Totals report. (JD)
+    - Fixed issue with cPanel Accounts Report when disable caching was enabled. (MG)
+
+* Signup
+    - Remove @ character from cPanel usernames on sign up. (MG)
+    - Ensure MaxMind connects over HTTPS. (MG)
+    - Fixed style issue on sign up compare packages page. (MG)
+    - Add proper validation to package id before attempting to add to cart. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.9.0
+* System / Admin
+    - Fixed issue that was preventing the creation of a new TLD domain product when using multiple languages. (JD)
+    - Fixed issues with "Start Date" and "End Date" filters on event list. (JD)
+    - Fixed issue preventing the display of the customer group name when editing permissions. (JD)
+    - Fixed single and double quotes in the Requested Cancellation Event and Cancellation Reason. (JD)
+    - Fixed issue not allowing to save "Hide hosting custom fields" value when creating a new product. (JD)
+    - Updated to the latest version of mPDF. (MG)
+    - Fixed issue with importing cPanel Accounts and Packages. (MG)
+    - Add support for .pk TLDs to cWhois. (MG)
+    - Ensure an error message is displayed when attempting to create a staff member with an email that already exists. (MG)
+    - Fixed issues with the WHMCS importer and due dates. (MG)
+    - Ensure at a glance and vitals are properly cached, to speed up dashboard loading. (MG)
+    - Updated new install announcement date. (MG)
+    - Fixed possible issue with global search results returning "null" & duplicate values. (JD)
+    - Fixed a possible issue when parsing incoming emails when the plain text version is blank. (MG)
+    - Fixed issue with WHMCS products export when using multi-currency. (MG)
+
+* Support
+    - Fixed some issues when trying to display special characters in a Knowledge Base Article. (JD)
+    - Updated "Alternate Accounts" so that any alternate account can open support tickets, and when an admin replies to them it should send an email notification to that email, to the main account email, and to any alternate account marked as support. (JD)
+    - Fixed the count for ticket filters to greatly increase speed when using a large ticket database. (MG)
+    - Fixed Knowledge Base message about not being able to post comments. (JD)
+    - Ensure the close ticket permission is always checked on admin side when closing tickets or showing close ticket button. (MG)
+
+* Clients
+    - Merge Packages is now a multiselect dropdown to select the packages you want to move to the other account. (JD)
+    - Merge Packages now also merges the recurring fees related to the packages and their addons. (JD)
+    - Adding the email from the original account to the destination account as an alternate account is now optional. (JD)
+    - Fixed issues with "Date Created" filter on customers list. (JD)
+    - Fixed issue with domain extra fields not being editable for uncomplete transfers. (MG)
+    - When deleting a client, invoices will not be deleted. They will remain for accounting purposes. (JD)
+    - Fixed issue with not showing a success message when a client updates their cPanel password. (MG)
+    - Ensure the next billing date on public side of a product shows with the proper date format. (MG)
+    - Ensure the expiration date of a domain shows with the proper date format. (MG)
+    - Fixed display format of next due date on client side product billing tab. (MG)
+    - Fixed possible issue on reset password when the email does not exist. (MG)
+    - Fixed missing div on clients ticket list. (MG)
+    - Fixed issue when sorting the domain list via expiration date when no registrar plugin was used. (MG)
+    - Ensure client side product list shows the product group when it's a domain package. (MG)
+    - Fixed issue with client side not displaying product list when CE could not connect to a package's DirectAdmin server. (MG)
+
+* Billing
+    - Fixed issues with "Date Paid" filter on invoices list. (JD)
+    - Added "Date Created" filter on invoices list. (JD)
+    - Fixed VAT validation. (JD)
+    - VAT field will be always displayed if the client country is part of the European Union. (JD)
+    - PDF invoices will now always display the client VAT number if it is valid, even if it is not a VAT Invoice. (JD)
+    - PDF invoices will now always be displayed as a VAT invoice if the default country is part of the European Union, or if the client is under a Tax Rule that uses VAT. (JD)
+    - Fixed issues with "Date Paid" filter on invoices list. (JD)
+    - Added "Date Created" filter on invoices list. (JD)
+    - Added "Unsent Invoices" filter on invoices list. (JD)
+    - Added invoice Failed Reason for 'Has packages having "Charge CC Automatically" disabled'. (JD)
+    - Always allow to edit due dates on unpaid invoices, even if it is under a subcription. (JD)
+    - Fixed "Cancel Subscription" button to be available also when pressing the "Unlock Invoice Options" button. (JD)
+    - Added option to reset the "Billing-Profile-ID" on the plugins using it. (JD)
+    - Added new setting to exclude free domains from "Charge Domain Invoice Offset". This helps free domains to be invoiced together with the hosting package when their next due date is matching. (JD)
+    - Updated database tables to use fields of type Decimal, to avoid issues with amounts. (JD)
+    - Added Chinese Language support to PDF files. (JD)
+    - Fixed possible slow down on invoice page due to RazorPay. (MG)
+    - Updated currencies with all the ones that appear on the list of circulating currencies listed in Wikipedia [https://en.wikipedia.org/wiki/List_of_circulating_currencies]. (JD)
+
+* Plugins
+    - Fixed issue with automailer and creating tickets when ran from the cron. (MG)
+    - Fixed encoding issue with changing a cPanel password when a "&" was in the password. (MG)
+    - Fixed issues with "Date Created" filter on Client Data CSV Exporter. (JD)
+    - Fixed issues with "Bill Date" and "Date Paid" filters on Invoice Data CSV Exporter. (JD)
+    - Fixed Automation Summary for Credit Card Payments Processor. (JD)
+    - Updated Payza URL from https://www.payza.com to https://www.payza.eu (JD)
+    - Updated Paypal plugin to allow Subscription id-changes. (JD)
+    - Remove old subscriptions from unpaid invoices when subscription is cancelled. (JD)
+    - Updated Authorize.Net CIM to use the new "Accept Customer" API. (JD)
+    - Added new automation service to auto-terminate overdue packages. (MG)
+    - Add new Snapin to allow clients to unblock themselves via CSF on cPanel servers.  Development Sponsored by Swish Online. (MG)
+    - Added new registrar plugin for Synergy Wholesale. Development Sponsored by Swish Online. (MG)
+    - Do not ensure a client is active when auto suspending packages. (MG)
+    - Added new registrar plugin for Name.com (MG)
+    - Do not export data from the registrar of domains when exporting full client data. (MG)
+    - Fixed issue with registering .uk domains with Internetbs plugin. (MG)
+    - Updated Worldpay URL. (JD)
+    - Ensure a proper expiration date when using NETIM. (MG)
+    - For cPanel reseller accounts, call terminatereseller to ensure all accounts under the reseller are also removed when deleting a cPanel package. (MG)
+    - Added Paypal Express Checkout gateway plugin. (JD)
+    - Fixed a non-numeric value error with the PHPSysInfo snapin. (MG)
+    - Ensure that the PayPal business email address is trimmed of whitespace when passing as a form value (MG)
+    - Fixed possible issue preventing clients from being deleted when they are set to Stripe Checkout, and do not have a CC stored at Stripe. (MG)
+    - Added new "Ticket Assign To" option in the "Auto Suspend / Unsuspend" automation service plugin, so if "Create Ticket" is set to YES, you can select to whom you want the ticket to be assigned.
+    - Updated MaxMind fraud checking to use SSL. (MG)
+    - Updated NETIM API URL. (MG)
+
+* Reports
+    - Added new report "Income By Gateway". (JD)
+    - Updated "Coupon Summary" report to not depend on packages statuses or recurring fees, so that it can display all the results. (JD)
+
+* Signup
+    - Fixed issue with getCartSummary. (JD)
+    - Fixed issue with bundledProducts var on SignuppublicController. (JD)
+    - Added support for .af, .com.af, .org.af, .edu.af, .tv.af, .net.af TLD lookups. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.8.1
+* System / Admin
+    - Fixed issue that was allowing to try email empty email addresses. (JD)
+    - Fixed "Required variable: jsSources was not passed" error when saving 'Public Style' settings. (MG)
+    - Fixed PHP 7.2 count issue in admin dashboard. (JD)
+
+* Billing
+    - Fixed a non-numeric value error with monthly usage. (JD)
+    - Fixed issue that was resetting quantity when cloning or merging invoices. (JD)
+    - Fixed a countable issue when merging and cloning invoices. (MG)
+
+* Signup
+    - Fixed issue with displaying hosting fields when "Hide Hosting Fields" was enabled. (JD)
+    - Fixed issue with the "Continue" button on sign up, when using the compare style and stock level is 0. (MG)
+
+* Plugins
+    - Fixed error with Automailer sending the messagetype object instead of the messagetype id when trying to create a ticket. (JD)
+
+* Clients
+    - Fixed issue with sending welcome emails and server.php not being included properly. (MG)
+
+* Support
+    - Fixed the count for ticket filters to greatly increase speed when using a large ticket database. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.8.0
+* System / Admin
+    - Fixed issue not allowing to upgrade from versions lower than 5.0.1. (JD)
+    - "Hide hosting custom fields" checkbox located under General tab when configuring a Hosting Product now has a reference to the related setting located in "Settings > Products > Order Page > Prompt for domain username and password". (JD)
+    - Updated package variable varname to be 250 characters. (MG)
+    - Fixed Security Issue.  More details to be released at a later date. (MG)
+    - Renamed billing cycles in some sections. Semi-Annual or Semi-Annualy is now Semiannually, Annual or Yearly is now Annually. (JD)
+    - Added Beta support for PHP 7.1 and PHP 7.2.  ionCube Loader 10.2 or higher is now required. (MG)
+    - Remove unused fonts from our PDF generation, drasically reducing the size of the download. (MG)
+    - Updated API to allow getting user based on their id. (MG)
+    - Updated announcements to only notify for active packages when Audience is: Select Servers, Select Product Groups or Select Products. (JD)
+    - Fixed lazy loading of javascript while behind CloudFlare. (MG)
+    - Fixed invalid function call when adding an alt-account. (JD)
+    - Ensure all DejaVu fonts are available for PDFs. (MG)
+    - Added new event listener for Invoice-Paid. (MG)
+    - Removed unused "JavaScript Source" template setting. (MG)
+    - Added "Package Group Type Id" in the custom options for notifications rules. (JD)
+    - Added action dropdown to select what you want a notification to do. (JD)
+
+* Support
+    - Fixed possible issue with submitting tickets when 'Allow Customer File Uploads' is turned off. (MG)
+
+* Plugins
+    - Removed deprecated plugin gateway fields '30 Day Billing' and 'Generate Invoices After Callback Notification'. (JD)
+    - Ensure Inteworx plugin can properly validate SSL certs. (MG)
+    - Fixed issue preventing the BuycPanel plugin from displaying licenses properly. (MG)
+    - Fixed different issues among gateway plugins. (JD)
+    - Added the ability for server plugins to show a public (customer) side view. (MG)
+    - Added new CoinPayments gateway plugin. (MG)
+    - Updated automation service plugin 'Delete Pending Users' to also allow deleting Inactive, Cancelled and/or Fraud users, as long as he/she does not have any active package or opened ticket. (JD)
+    - Added filter by 'Client Id' in Customer Data CSV Exporter. (JD)
+    - Fixed issue with Bulk Mailer corrupting support ticket attachments. (MG)
+    - Do not mark domains as cancelled when we get an 'Access Denied' error message from ResellerClub. (MG)
+    - Removed Bitcoin from Stripe Checkout. They are no longer supporting it. (JD)
+
+* Signup
+    - Fixed different issues related to bundled products not working as expected, like them restarting the order, or them not been properly removed from the cart. (JD)
+    - Fixed issue with error messages for domain in signup, when their translations had a single quote. (JD)
+    - Allow domain name to be sent to sign up with the GET paramters domain and ext. (MG)
+    - Allow sign up step 1 to be a POST request, to fix 3rd party domain passing. (MG)
+    - Fixed possible bug with updating a package on the hosting server not triggering unless the package changed. (MG)
+    - Added two new server plugins for stratumsphere.io (MG)
+    - Added "There are no packages configured for this package type" warning for signup Domains and Compare views when there are no products configured. (JD)
+    - Create Account needs to have the ToS check-box, if it's enabled. (JD)
+    - Added support for MaxMind's Device Tracking Add-on. (MG)
+    - Fixed responsive issue with pricing table on sign up. (MG)
+
+* Clients
+    - Fixed possible issue with saving domain extra attributes and the epp code on admin. (MG)
+    - Fixed issue with displaying name servers on the client side. (MG)
+    - Fixed clickable area on login page for New Account and Reset Password. (MG)
+    - Ensure Server and IP Address are also hidden from client side when "Hide hosting custom fields" is enabled. (MG)
+    - Fixed filter buttons on tables to be more readable (MG)
+    - Removed usage of NE_EVENTLOG_USER_ERASED and any previous events log of erased users. Also, deleting a user will now also delete his events log. (JD)
+    - Added a button in the customer profile (Admin side), to export client data. (JD)
+    - Fixed style issue on the main page when only two boxes are shown. (MG)
+    - Fixed conflict with CloudFlare and updating name servers on client side. (MG)
+    - Added support for [SERVERNAME] email tag in welcome emails. (MG)
+
+* Billing
+    - Updated invoice emails to use the taxes names. (JD)
+    - Process Credit Card Payments will now ignore an invoice when "Charge CC Automatically" is disabled for a package in the invoice. (JD)
+    - Fixed possible error with invoice direct link when an invoice is already paid. (MG)
+    - Fixed 'Make this my default payment method'. (JD)
+    - Fixed an issue due to the way MySQL is storing the values. Fixed by rounding the values to 2 decimals before comparing them. (JD)
+
+================================================================================================================
+================================================================================================================
+
+5.7.1
+* System / Admin
+    - Fixed issue adding "\r\n" for new lines in staff signatures. (MG)
+    - Ensure CSS is not cached in a new version. (MG)
+    - Fix loading jQuery and BootStrap javascript when using CloudFlare. (MG)
+
+* Plugins
+    - Ensure the Fetch Ticket service does not get disabled during upgrade. (MG)
+
+* Clients
+    - Add missing translations. (MG)
+    - Ensure we only call get products on dashboard if we are showing the products list. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.7.0
+* System / Admin
+    - Implemented new "open ticket" option when a product is ordered. (MG)
+    - Allow "Portuguese (Brazil)" (pt_BR) as a possible translation language. (MG)
+    - Fixed conflicts with live chat and CloudFlare. (MG)
+    - Implemented new "Auto Login" feature to allow developers to auto log clients into their account. (MG)
+    - Allow server plugins to have actions that a user can perform (reboot, etc) (MG)
+    - Added "Invoice Sent" in the custom options for notifications rules. (JD)
+    - Added "Sent Date" filter to invoices grid. (JD)
+    - Added new event listener for Order-NewPackage, triggered when a package is created from sign up. (MG)
+    - Ensure new permissions are assigned to default groups during installation. (MG)
+    - Ensure client side helper classes are not encoded. (MG)
+    - Account for MariaDB 10.2 in installer. (MG)
+    - Ensure we have a valid price for a domain before we attempt to import it. (MG)
+
+* Plugins
+    - Update Blesta Importer to only import 1 company (selectable in blesta2ce.php). (MG)
+    - Fixed Auto Suspend / Unsuspend service plugin to email about a package only once. (JD)
+    - Implemented new BitPay payment gateway. (MG)
+    - Fixed issue with updating the password in the Plesk10 server plugin. (MG)
+    - Fixed automation service plugin Auto Suspend / Unsuspend to avoid suspending packages using Override Auto Suspend when Suspend Customer is enabled. (JD)
+    - Domain Updater now also updates any recurring fees related to the domain, including: addons, coupons, and any custom recurring fee that applies to the domain. (JD)
+    - Updated Stripe Checkout to include address. (JD)
+    - Fixed possible issue with TCAdmin and creating accounts. (MG)
+    - Fixed Stripe Checkout and Razorpay forms to avoid some issues when some values where using single quotes. (JD)
+    - Fixed issue that prevented the TeamStatus sidebar from properly working. (MG)
+
+* Signup
+    - Fixed issue with IE and free domain price showing on sign up. (MG)
+    - Sign up will now remove a product from the cart if it is a bundle without a properly configured child product. (MG)
+    - Fixed displayed payment term for domains in signup order summary. (JD)
+    - Added support for .qa and .com.qa TLDs when no registrar plugin is used. (MG)
+    - Fixed signup issue that allowed to change domain billing cycle without revalidating its addons. (JD)
+    - Fixed issue where a space was showing in the cart steps while using gray public style color. (MG)
+
+* Support
+    - Staff ticket list is now sorted by the last reply time by default. (MG)
+    - Fixed gravatar for auto close messages when there is no staff assigned to the ticket. (MG)
+    - Added KB search to the top of each KB article. (MG)
+    - Internal Support Tickets will no longer send Feedback Request emails to clients. (JD)
+
+* Billing
+    - Fixed javascript issue when multiplying amounts. (JD)
+    - Details text box is now bigger on add invoice -> add line. (JD)
+    - Signup and Recurring Fees now creates Invoice Entry Descriptions and Details with the same format. (JD)
+    - Fixed issue with unmasking of the invoice page if an invoice is attempted to be paid without selecting a payment method. (MG)
+    - Prorate configuration is now product specific and is located under the product configuration. (JD)
+    - Fixed signup to not create recurring fees if the coupon is only for setup fees, even if the coupon is set as recurring. (JD)
+    - Fixed invoice generator to ignore already existing recurring fees of coupons that are only applying to setup fees, so that it does not add invoice entries to the invoice. It will also delete that recurring fee to get rid of the problem once and for all. (JD)
+    - Added the "Applies to" information of the coupon in the respective invoice entry and recurring fee, so that you can see in the details what is the coupon really applying to. (JD)
+    - When generating an invoice, if there is a percentage coupon entry but there is nothing for it to discount, the invoice entry for the coupon will be removed from the invoice. (JD)
+    - When using the "Recalculate" button on invoices, if there is a percentage coupon entry but there is nothing for it to discount, the invoice entry for the coupon will be removed from the invoice. (JD)
+    - When editing and invoice and using the Save "Changes" button on the invoice, if there is a percentage coupon entry but there is nothing for it to discount, the invoice entry for the coupon will be removed from the invoice. (JD)
+    - You can now send an invoice receipt when manually adding a payment that fully pays an invoice. (JD)
+    - Addons can now use independent display types in signup for a given package. (JD)
+    - Addons can now use a quantity display type to allow ordering any quantity of that addon and be charged for the respective price. (JD)
+    - Moved the View PDF Icon to before invoice description on client side invoices view. (MG)
+
+* Knowledgebase
+    - Added category name and category id to array of data available on kb main page. (MG)
+
+* Clients
+    - Fixed placement of error messages for password field on edit profile. (MG)
+    - Added new event log when the auto suspend service suspends or unsuspends packages. (MG)
+    - Fixed issue with deleting a package when the PayPal Subscription fails to cancel. (MG)
+    - Allow a client to remove cancellation request from a package they have requested to cancel. (JD)
+    - Updated main public template (client side) to BootStrap v3. (MW/MG)
+    - Fixed issue with replacing the [COMPANYEMAIL] tag in new password reset emails. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.6.0
+* System / Admin
+    - Fixed false positive being detected when Clientexec is in a sub-directory of WordPress with the WordFence plugin. (MG)
+    - Fixed tickets user for "Automatic Cancellation of PayPal Subscription Failed". (JD)
+    - Fixed issue with the loading of the "Advanced and Plugin Settings" panel when using CloudFlare. (MG)
+    - Updated add/edit client API to allow to send values for default custom fields (address, phone, etc) (MG)
+    - Fixed Transactions tab. (JD)
+    - Fixed email testing when using "Ignore Invalid Mail Server SSL". (MG)
+    - Fixed possible issue with adding/updating a staff member causing a PHP error. (MG)
+    - Fixed some broken permissions when editing a customer. (JD)
+    - Updated polyfill for EventSource to Live Chat works properly in IE and Edge. (MG)
+    - Fixed issue with email testing when a language other than English is used. (MG)
+    - Added custom fields tab to admin add support ticket. (JD)
+    - CC and BCC custom fields in add support ticket will now also email the first ticket message. (JD)
+    - Added event logs when requested to reset password. (JD)
+    - Added event logs when resetting the password. (JD)
+    - Moved the description for a password setting field under the setting name. (MG)
+    - All public (frontend/client side) controller files are now not encoded. (MG)
+    - Added 3 days timeout to reset local attributes, if can not connect to License Defender. (JD)
+    - Updated invalid license page to check if the license is valid (and redirect back to index.php), on page refresh. (MG)
+    - Added event listeners for: Client-Create, Client-Update, Client-Delete, UserPackage-Activate. (MG)
+    - Added some missing translations. (MG)
+    - Allow an admin email & password to be validated with the validate user API resource. (MG)
+
+* Billing
+    - PDF invoice will now only display Tax Columns if customer is Taxable and has a matching tax rule. (JD)
+    - Added new billing setting "Recalculate Next Due Dates Related To Packages". (JD)
+    - Added new API resources to add and update a recurring fee. (JD)
+    - Added new API resources to add and update an invoice. (MG)
+    - Added new API resources to get an invoice and all invoices. (MG)
+    - Ensure invoice status names can be translated. (MG)
+    - Avoid generating new invoices from recurring fees related to pending packages that already has an unpaid invoice. (JD)
+    - Fixed issue to configure domain addon 3 years price. (JD)
+
+* Plugins
+    - Fixed Paypal refunds on partial payments. (JD)
+    - Updated the invoice reminder summary email to show the full name (and organization) of the client attached to each email that was sent out. (MG)
+    - Added new PayStack Payment Gateway. (MG)
+    - Ensure the proper currency code is sent to 2CheckOut. (MG)
+    - Log a proper event error if CE's IP has not been properly added to eNom's API whitelist. (MG)
+    - Ensure that the TeamSpeak3 server is started after it has been unsuspended. (MG)
+    - Updated TeamSpeak3 plugin actions to be based on the status of the TeamSpeak3 Server. (MG)
+    - Fixed Authorize.net CIM to properly work in signup. (JD)
+    - Updated cPanel username checking to allow for usernames up to 16 characters in length. (MG)
+    - Updated "package not found" error message in cPanel to explain about resource limitations. (MG)
+    - Added Braintree payment plugin. (JD)
+    - Fixed Stripe Checkout gateway plugin to avoid creating a customer per payment. (JD)
+    - Added new importer for Blesta. (JD/MG)
+    - Updated Quantum and QuantumVault plugins to work with new API changes. (MG)
+
+* Signup
+    - Fixed issue when applying credit from signup. (JD)
+    - Fixed issue with "Free Domain" not properly working when having "Hide hosting custom fields" enabled. (JD)
+    - Allow the full domain name to be passed as the GET param "domainName" instead of "domainName" and "tld". (MG)
+    - Fixed issue in signup using the wrong package when cancelling an order before reaching summary, and then selecting a different package. (MG)
+
+* Reports
+    - Updated "Overdue Invoices" Report to show the full client name, instead of just the client ID. (MG)
+
+* Support
+    - Fixed possible issue with the rate ticket hash being invalidated if a ticket is reopened and closed multiple times. (MG)
+    - Fixed issue with ticket display when the ticket has ticket logs assigned to a package that was deleted. (MG)
+    - Fixed support ticket file attachments to avoid issues with unwanted spaces in "Allowed File Extensions" before checking file extension when attaching a file. (JD)
+    - Added "Last Reply" column to support ticket list. (MG)
+    - Implemented a tweet button on the support ticket feedback page, when a ticket has been rated as excellent. (MG)
+    - Fixed language call for ticket status on public client dashboard. (MG)
+    - Fixed possible issue with ticket logs if the name is longer then 35 characters. (MG)
+    - Added new setting to determine how many "Top Questions" are shown when a ticket type is selected, when submitting a new ticket. (MG)
+
+* Clients
+    - Allow a staff member to create guests users from the users list. (MG)
+    - Redirect to the client's profile after successful creation from users list. (MG)
+    - Allow guests to be filtered on users list. (MG)
+    - Updated events list to show the reason a client requested cancellation. (MG)
+    - Fixed possible issue with client side host records tab of a domain package. (MG)
+    - Ensure the default country is set to a new user upon account registration. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.5.4
+* Plugins
+    - Fixed logic for "Days to trigger Pre-Notify autoclose" in the "Ticket Auto Close" service plugin. (JD)
+    - Bulk Mailer will clean email_queue_addressees when sending emails, and show a better error message. (JD)
+    - Added Razorpay payment plugin. (JD)
+
+* System / Admin
+    - Fixed issue with TLD not allowing to edit them. (JD)
+    - Added installer checks for JSON and SimpleXML PHP extensions. (MG)
+    - When adding a new email template, default the type to the view you were on. (JD)
+    - Fixed issue with preventing live chat from properly working. (MG)
+    - Added ability to test mail configuration from the mail configuration settings. (MG)
+    - Replaced Knowledgebase setting "Guest users can post comments" with Knowledgebase Permissions "Post Comments". (JD)
+    - Fixed notifications to display the proper package custom fields. (JD)
+    - Fixed issue with SSL welcome emails not properly replacing the Domain Name tag. (MG)
+
+* Billing
+    - Added "Mark Refunded" and "Mark Credited" buttons to change an invoice status if required without running the process. (JD)
+
+* Clients
+    - Added "Send Invoice" button on the client side invoice view. (JD)
+    - Fixed display of global search when matching an organization to show the organization that was matched. (MG)
+    - Allow a pending package to be set to a cancelled status, instead of only active or pending. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.5.3
+* Plugins
+    - Added a new "limit" setting to the Bulk Mailer service, which will limit the amount of emails that are sent per run. (MG)
+    - Added NameCheap domains integration. (MG)
+
+* System / Admin
+    - Fixed issue with keyboard popping up during select box while using a tablet. (MG)
+    - Fixed bug with admin announcement view disappearing. (MG)
+
+* Signup
+    - Fixed issue with Free Domains not respecting the TLDs that were selected to be free. (MG)
+    - Fixed issue with bundled products that were set to No Include in Signup, giving an error. (JD)
+
+* Support
+    - Include attachment in email when attaching a file to a support ticket manually created to a client. (JD)
+
+================================================================================================================
+================================================================================================================
+
+5.5.2
+* Billing
+    - Added option to "Make this my default payment method if there are no issues with this payment" when paying an invoice. (JD)
+    - Added column "Failed Reason" for Invoices grid. You can enable it from the gear icon on the top-right corner of the grid. (JD)
+    - Fixed information of the recurring fees for coupons that are applied to domain packages, as they were using the wrong paymentterm, nextbilldate and monthlyusage. (JD)
+    - Updated popup messages when trying to process payments, to avoid asking twice for authorization. (JD)
+
+* System / Admin
+    - Now when clicking on a date filter on invoice or client list, it will reset the date filter. (JD)
+    - Fixed HTML tags in the description tooltip under server settings. (JD)
+    - Do not try to show graphs on admin dashboard if the staff member does not have access to view reports. (MG)
+    - Fixed possible bug that allowed for duplicate TLDs when saving a new one. (MG)
+
+* Reports
+    - Added "Client Monthly Retention" report. (JD)
+
+* Support
+    - Fix possible bug with attempting to send subscribed ticket emails to staff members that were deleted. (MG)
+    - When adding a new ticket to a client, "Open ticket in the name of user" and "Notify user" will be checked by default. (JD)
+    - Allow an attachment to be added when adding a support ticket manually to a client. (JD)
+
+* Plugins
+    - Fixed description not showing on Import Plugins. (MG)
+    - Properly sort Import and Export Plugin Tabs (MG)
+    - Do not show cPanel accounts that can not be imported under cPanel / WHM Account Importer. (MG)
+    - Added DNS record management for ResellerClub. (MG)
+    - Allow QuantumVault to void an unsettled transaction when attempting to refund it. (JD)
+    - Added refunds in 2Checkout. (JD)
+    - Allow refund of invoices paid with paypal subcription. (JD)
+
+* Signup
+    - Fixed issue in signup when the first package group is set to not be in sign up. (JD)
+    - Fixed issue with free domains not working with domain transfers. (JD)
+
+* Clients
+    - Allow a staff member to reset a clients password. (MG)
+    - Fixed bug preventing packages from being activated when manually changing a client's status from pending to active. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.5.1
+* System / Admin
+    - Updated reCaptcha to use sockets instead of file_get_contents. (MG)
+    - Updated PHPMailer to the latest version to address security issues. (MG)
+    - Added event logs when deleting a client. (JD)
+    - Added event logs when deleting a recurring fee. (JD)
+    - Added event logs when deleting a support ticket. (JD)
+    - Fixed issue with keyboard popping up on mobile when clicking on a select dropdown. (MG)
+
+* Plugins
+    - Fixed paypal plugin to search for next subscription invoice when main invoice is not unpaid. (JD)
+    - Fixed issue with WHMPHP plugin attempting to retrieve a theme when it shouldn't. (MG)
+    - Added filter by 'Customer Group' in Customer Data CSV Exporter. (JD)
+    - Fixed issue with auto suspend service that was opening multiple tickets per package. (JD)
+    - Fixed issue with eNom domain spinner showing duplicate domains. (MG)
+    - Sanitize plesk username during sign up. (MG)
+    - Fixed PHP errors in PlanetDomain plugin. (MG)
+    - Added new "Location" field to SolusVM to allow VMs to be created in a user-selected location at signup. (MG)
+    - Added RapidSSL Wildcard to the available certificates for eNomSSL. (MG)
+    - Fixed blank domains showing up when importing from ResellerClub. (MG)
+    - Updated archive logs service to be from "ClientExec Archive Logs Service" instead of the back up service. (MG)
+    - Added filter by 'Customer Group' in Customer Data CSV Exporter. (JD)
+    - Fixed WHM Accounts import to properly create new users. (MG)
+    - Updated "Invoice Reminder" and "Late Fee" service plugins to also take in count invoices with missing or expired credit card information. (JD)
+
+* Signup
+    - Fixed PHP warnings on sign up. (JD)
+    - Fixed issue with maxmind failing on sign up. (MG)
+
+* Clients
+    - Fixed activating cancelled packages when re-activating a client (JD)
+    - Display a proper error message when creating a new client with an email address that already existed (MG)
+    - Allow the domain name of an SSL certificate to be updated if the package is not tied to a plugin. (MG)
+    - Do not allow a client to cancel expired packages. (MG)
+    - Only show Next Due Date and Billing Cycle for active packages on client view. (MG)
+    - Fixed issue with raw HTML showing after you import a domain. (MG)
+
+* Billing
+    - Fixed issue when addon option price is empty (JD)
+    - Fixed some missing translations (MG)
+    - Fixed date in "End of Billing Period" when requesting cancellation. (JD)
+
+* Support
+    - Fixed PHP error on viewing ticket rating. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.5.0
+* System / Admin
+    - Updated cWhois to latest version, to re-add support for .id TLDs. (MG)
+    - Updated default run-times of automation services so they run when they should logically. (MG)
+    - Added a new mail setting to ignore invalid mail server SSL certificates. (MG)
+    - Product Custom Fields are now refreshed after saving the changes in settings. (JD)
+    - Added reset password error message when the email submitted is not a registered one. (JD)
+    - Display the proper messages when the Welcome Emails can not be sent. (JD)
+    - Added the ability to offer free domains when bundled with a certain hosting package. (JD)
+    - Fixed issue when unchecking 'Domains Products' for bundling was not actually removing the bundle. (JD)
+    - Added Farsi translation for client side, thanks to Hadi Shahidi. (MG)
+    - Changed the date range filters to a dropdown in the invoices grid. (JD)
+    - Changed 'Date Created' filter in the Clients List grid. (JD)
+    - Fixed bug with sending emails during package cancellation (MG)
+    - Updated avatar images to use new avatar.bio service. (MG)
+    - When updating a registrar of a TLD product, it also updates the registrar on any pending packages that are using it. (JD)
+    - When updating a server Shared IP, it also update the Shared IP on the packages that are using it. (JD)
+    - Fixed bug with the "Public Link" on the KB Search sidebar plugin not showing the proper SEO Link. (MG)
+    - Fixed issue with the color picker on add/edit customer group when utilizing CloudFlare. (MG)
+    - Fixed location of events notification icon to not be behind intercom. (MG)
+    - Fixed issue with session language being overridden when an admin views as client, and goes back to admin. (MG)
+    - Fixed issue when addons contain a single quote in their description for domains. (MG)
+    - Changed default email sending timeout to not be as long. (MG)
+    - Merged common ande default templates, so we only have 1 template now. (MG)
+    - Updated reCaptcha to latest version. (MG)
+    - Ensure hosting password field is a proper password field, instead of text. (MG)
+    - Fixed [RAW_AMOUNT] email template tag to be just a float number rounded to the currency precision. (JD)
+    - Fixed missing translation on request cancellation view. (MG)
+    - Fixed Dropdown Custom Fields to show the selected value even if the value is no longer available, so that it continue displaying the current value that is stored in the database. (JD)
+    - Hosted versions will no longer show an upgrade link, but instead direct the admin to contact CE support. (MG)
+    - Security Enhancements (MG)
+
+* Support
+    - Ticket Search filters now support to search the ticket subject or content. (JD)
+    - Added the ability to add CC & BCC email addresses for ticket notifications. (MG)
+    - Knowledge Base Category Names are now properly displayed when set them as Series or Global Series. (JD)
+    - Fixed bug with displaying images in KB articles when SEO links is turned on, but the article is accessed via the old method. (MG)
+    - Renamed 'Attaching' with 'To attach' in support tickets. (JD)
+    - Fixed issue causing 2 emails to be sent when a ticket was opened via the site widget. (MG)
+    - Fixed issue with Support Widget not working when captcha was enabled. (MG)
+    - Added the appropriate shebang to SupportPipe.php (MG)
+
+* Plugins
+    - Added new setting to Order Processor Service to also allow it to activate manually added packages. (MG)
+    - Fixed error handling with PlanetDomain, so proper error messages are shown to admins. (MG)
+    - Added 'Payment Method' field to the 'Invoice Data CSV Exporter'. (JD)
+    - Added additional validation to Virtualmin create process to show proper error messages if we are missing any required parameters. (MG)
+    - Fixed NameSpinner not returning any domains with eNom. (MG)
+    - Fixed bug preventing ResellerClub domains from being marked as cancelled with the domain updater. (MG)
+    - Registrar Domains Importer now refreshes the list after importing. (JD)
+    - Fixed Income Growth delta Last Year. (JD)
+    - Updated 'Order Processor' to only activate packages if have at least 1 paid invoice, and none of them are unpaid, partially paid or pending. (JD)
+    - Removed old and deprecated directi plugin. (MG)
+    - Updated paypal plugin to format the amount always as a float number, and not using the currency format, to avoid issues. (JD)
+    - Fixed issue with WHMAccounts importer that was causing accounts to be imported as guests. (MG)
+    - Fixed possible bug when we are searching for a TLD with eNom and including numerous other TLDs for suggestions. (MG)
+    - UTF8 encode data returned from cPanel before trying to decode the JSON. (MG)
+    - Updated API end-point for PlanetDomain registrar plugin. (MG)
+    - Added name suggest support to ResellerClub plugin. (MG)
+
+* Billing
+    - Added link to PDF Invoice from admin invoice view. (MG)
+    - Only show 'Automatically Charge CC' if the client is set to a CC plugin. (JD)
+    - Updated 'Failed Credit Card Invoices' filter to also include the invoices with no CC, or with expired CC. (JD)
+    - Deleting a package will now clone any unpaid invoices related to the package but excluding the entries related to it, and will void the previous invoices. (JD)
+    - Fixed permission 'Edit customer credit card' to properly work when disbaled. (JD)
+    - Allow an admin to cancel the paypal subscription tied to an invoice or recurring fee (MG)
+    - Updated client Payment Method section to only ask for the credit card when using Stripe Checkout if the client does not have yet an stored Billing-Profile-ID for Stripe Checkout. It will also display a button to update the credit card at will. (JD)
+    - Show the actual error message in the support ticket when a domain fails to automatically renew upon client payment. (MG)
+    - Do not autocharge invoices for packages that are Pending Cancelation, Cancelled or Expired. (JD)
+    - Do not automatically send invoices for packages that are Pending Cancelation, Cancelled or Expired. (JD)
+
+* Signup
+    - Fixed CSS bug with non-english characters in product groups. (MG)
+    - Fixed style issue for Microsoft Edge to properly display sign up steps. (JD)
+    - Show the full client name and organization in new order notification email of an existing client. (MG)
+    - Fixed Stripe Checkout in signup when Hide Payment Methods is enabled. (JD)
+    - Fixed custom fields for domain packages to be displayed in signup. (JD)
+    - Fixed issue with single and double quotes in addon descriptions on signup. (MG)
+    - Fixed style issue on compare style of sign up buttons. (MG)
+
+* Clients
+    - Allow a clients packages to be filtered by package status. (MG)
+    - Allow PayPal subscriptions to be cancelled when a client requests cancellation of their package or a staff member cancels or deletes a user package. (MG)
+    - Reset the user profile tab count when a ticket or pending order is deleted. (MG)
+    - Allow to translate the public header tabs of a clients package. (MG)
+    - Fixed issue when trying to update a user profile without a valid email address (MG)
+    - Fixed display issue on client side package view, that was showing the value instead of the friendly name of a drop down value. (MG)
+    - Added a new permission for clients to "View Announcements" (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.4.5
+* Support
+    - Fix XSS; More details to be released at a later date. (MG)
+
+* Clients
+    - Fix XSS; More details to be released at a later date. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.4.4
+* System/Admin
+    - Fixed issue with Transactions showing to all staff, even if permission is disabled. (MG)
+    - Fixed some event logs related to updates in Account Email and Alternate Accounts Emails. (JD)
+    - Updated custom note permissions to be Add & Manage. (MG)
+    - Fixed issue with the color picker not being hidden on customer group editing if you just close the window. (MG)
+    - Confirmation emails are now sent when a client requests cancellation of a package and when the cancellation is processed. (JD)
+    - Added validation to avoid trying to renew a domain when getting an Unknown expiration date. (JD)
+    - Addons are now revalidated when they are created, modified, deleted, assigned or removed to a Product or Product Group. (JD)
+    - Added the ability to filter by package group on package list. (JD)
+    - Fixed issue that showed "View Ticket Feedback" permission for customer groups. (MG)
+    - Ensure that client_notes database table has the appropriate subject field.
+
+* Plugins
+    - Added support for Buypass Gateway Plugin. (JD)
+    - Be more specific with an error message about invalid expiration in domain updater. (MG)
+    - Fixed issue cause Bulk Mailer to fail when an email had multiple attachments. (MG)
+    - Add more functionality to PlanetDomain plugin (MG)
+    - Fixed error when attempting to renew a domain with PlanetDomain. (MG)
+
+* Billing
+    - Updated function can_be_paid_by_user to take in count all the possible invoice statuses. (JD)
+    - Minor spelling correction in process invoice error message. (MG)
+    - Fix issue when trying to set a package to be Recurring and the first available Billing Cycle is 0. (JD)
+    - Fixed permission checking on events list of an invoice. (MG)
+    - Added the ability for clients to pick if they want their credit card automatically charged for each package they have. (MG)
+    - Removed events tab from an invoice if the staff member does not have access to view events. (MG)
+
+* Clients
+    - Distinguish between packages and domains in quick search. (MG)
+    - Allow an admin to set the number of announcements on the main page. (MG)
+    - Fixed issue with package count after merging a clients packages. (MG)
+    - Updated user profile packages list to remove invoice amount and link Next Billing Date to recurring charges view. (MG)
+    - Added the ability for a staff member to edit a client note. (MG)
+    - Fixed issue causing the delete button to not work on a clients profile. (MG)
+    - Fixed issue causing images to not properly display under FAQs. (MG)
+    - Fixed issue with the hover style on the active client profile tab. (MG)
+    - Added the ability for a client to renew a package before it is due. (MG)
+
+* Signup
+    - Fixed issue with the logout link not working properly while on the second step of a bundled product. (MG)
+    - Fixed blank error message on sign up if FraudLabsPro rejects the order. (MG)
+
+* Support
+    - Fixed issue with the limit drop down not working properly on ticket feedback view. (JD)
+    - Properly display the email address a ticket comes in from, if it comes from an alternate account. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.4.3
+* Clients
+    (#2102) - Pay Invoice button will not be clickable more than one time in the customer profile. (JD)
+    (#2112) - Change the style of delete and update buttons on customer profile. (MG)
+    (#2117) - Fixed bug with merge customer button showing on customer profile when the admin didn't have access to edit a customer. (MG)
+
+* Plugins
+    (#2110) - StripeCheckout will no longer validate CC data when running the migrateion report. (MG)
+    (#2105) - Migrate Payment Method report will not create gateway account for Inactive, Cancelled or Fraud customers. (JD)
+    (#2119) - Fixed bug that was causing eNom sign up to fail due to trying to create a reseller account instead of retail. (MG)
+    (#2125) - eNom form will now submit via ajax, so all data is not lost during a page refresh. (MG)
+    (#2128) - Fixed possible bug with PayPal subscriptions that could cause invalid invoices to be generated. (MG)
+    (#2116) - Fixed bug with internal logging in the VirtualMin plugin. (MG)
+
+* Support
+    (#2109) - Fixed Feedback email to staff to show the proper rating, instead of just a number. (MG)
+    (#2122) - Fixed bug with direct package link on ticket view not showing when youinitially assign a package to a ticket. (MG)
+
+* System/Admin
+    (#2118) - Fixed bug with SQL tool not showing proper column names in the output. (MG)
+    (#2126) - Removed a misplaced bracket on dashboard settings. (MG)
+    (#2121) - Allow more links to be ctrl+clickable, to open a new tab, for better multi-tasking. (MG)
+    (#2127) - Fixed bug with select boxes not showing properly on the "Advanced & Plugin" settings of a package. (JD)
+
+================================================================================================================
+================================================================================================================
+
+5.4.2
+* System/Admin
+    (#2079) - Fixed some tags that were not been replaced in the subject when sending emails. (JD)
+    (#2080) - Fixed issue with the End Date fields in filters getting data from an additional day. (JD)
+    (#2078) - Fixed several serious issues with languages. (JD)
+    (#2089) - Fixed Event List to display the Email events with the email tags properly replaced. (JD)
+    (#2005) - Updated footer to avoid overlap the grid dropdown. (JD)
+    (#2100) - Fixed javascript issues when using CloudFlare Rocket Loader. (MG)
+
+* Plugins
+    (#2081) - Fixed refunds for Stripe Checkout when using Bitcoin. (JD)
+    (#2083) - Renamed plugin Migrate Payment Methods to Migrate Payment Method to avoid breaking the Reports menu. (JD)
+    (#2084) - Update PSIGate's port to use their new SSL port. (MG)
+    (#2085) - Fixed an old logger call in Server Tastic SSL Plugin. (MG)
+    (#2086) - Fixed issue with StripeCheckout not always marking invoices as paid. (MG)
+    (#2087) - Updated PayPal callback verification to use SSL. (MG)
+    (#2088) - Fixed issue with Stripe Checkout and Authorize.net CIM not properly saving the Billing-Profile-ID from signup. (JD)
+    (#2090) - Updated Customer Data CSV Exporter with latest code. (JD)
+    (#2099) - Added an option to allow update Credit Card information in Stripe Checkout plugin. (JD)
+    (#2101) - Updated payment plugin StripeCheckout to delete customer data in Stripe Checkout when the account no longer needs it. (JD)
+
+* Signup
+    (#2082) - Fixed some items in signup related to not having a price, or having a price of 0. Not having a price should not create an invoice entry, while having a price of 0 should create it. (JD)
+
+* Clients
+    (#2098) - Added a loading mask when attempting to activate a pending package. (MG)
+    (#2103) - Disabled select2 select boxes on public side for mobile browsers. (MG)
+    (#2104) - Allow longer TLDs as valid email addresses. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.4.1
+* System/Admin
+    (#2061) - ALTER IGNORE TABLE does not work on MySQL 5.7.x (JD)
+    (#2047) - Added validations to date filters in customers list and invoices list to avoid breaking the code when sending an unexpected value. (JD)
+    (#1943) - Fixed admin menu to avoid asking about unsaved changes when leaving an invoice. (JD)
+    (#2073) - Fixed SSL detection in recaptcha library when using nginx. (MG)
+
+* Signup
+    (#2059) - Do not display Apply my Credit option in signup when the amount to pay is 0. (JD)
+    (#1330) - Product addon for free will now create invoice entry and create ticket if indicated in the addon. (JD)
+    (#1658) - Fixed issue in signup that was not displaying the product stock when using Show stock level in order form. (JD)
+
+* Plugins
+    (#2060) - Fixed issue with Domain Updater service constantly updating the recurring fee next due date on domain transferred when using Sync Due Date? (JD)
+    (#2056) - Fixed issue with CE Database Backup service. (JD)
+    (#2062) - Include the WHM Accounts importer. (MG)
+    (#2066) - Update payment plugin Stripe Checkout to work as an autopayment. (JD)
+    (#2068) - Added a new Diagnostics Report: Migrate Payment Methods. It allows to migrate CC Accounts to Authorize.net CIM or Stripe Checkout. (JD)
+    (#2076) - Stripe Checkout plugin now allows to use a customized logo image. (JD)
+    (#2075) - Stripe Checkout plugin now allows to accept Bitcoin payments. (JD)
+    (#2067) - Removed BOM encoding from AuthNET CIM class file. (MG)
+
+* Billing
+    (#2063) - Fixed issue with addon pricing options changing ids when saving addon changes. (JD)
+    (#2064) - Fixed issue with the tax column being too small when showing currency code on public side invoice view. (MG)
+
+* Clients
+    (#2065) - Changed the password field type to show the value on admin side custom fields for a user's package. (MG)
+    (#2069) - Added billing details and applies to package information on the product details in the customer profile. (JD)
+    (#2070) - Fixed issue that was preventing credit card numbers from being updated if the credit field was disabled (due to permissions). (MG)
+    (#2071) - Fixed issue in customer profile, displaying a package value even when recurring is set to no. (JD)
+    (#2077) - Fixed issue with displaying validated credit card details. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.4.0
+* System/Admin
+    (#2007) - Fixed some user custom fields settings (Admin Only, Read Only, Include in Signup, Include in Customer). (JD)
+    (#2012) - Fixed issue when ordering cancellations by customer. (JD)
+    (#2032) - Fixed issue that was preventing ID Protection from always being registered with a new domain name. (MG)
+    (#2029) - Removed mysql calls in favor of mysqli for initial PHP7 support. (MG)
+    (#1989) - Removed the "Allow run services from URL" setting. (MG)
+    (#2003) - Added mouseover bubble to disabled fields in the package details. (JD)
+    (#2045) - Added date filters to Accounts > Customers, and Billing > Invoice Lists. (JD)
+    (#2050) - Display only the top 10 customer groups (groups with most customers) in the main menu, as when having tons of them the menu is too large and can not see the items in the bottom. (JD)
+    (#2051) - Added links in the Customer Groups section to take you to the respective Customers list. (JD)
+    (#2053) - Allow to send Announcements by Product, and by Customer Group. (JD)
+    (#2055) - Fixed bug that was showing custom fields for a user that should not be shown. (MG)
+
+* Plugins
+    (#1977) - Added new Diagnostics Plugins to allow repair possible inconsistencies with customer ids between billing items. (JD)
+    (#1881) - Added a new Stripe Checkout gateway plugin. (JD)
+    (#1374) - Added a new Authorize.net CIM gateway plugin. (JD)
+    (#2044) - Added a new Diagnostics Report: Migrate CC Accounts to Authorize.net CIM. (JD)
+    (#2002) - 2Checkout payments now properly redirect to the invoice page. (MG)
+    (#2008) - Removed additional dot after invoice id when sending and invoice email with bulkmailer. (JD)
+    (#2010) - Removed outdated currency conversions from the Income Grow Report. (JD)
+    (#2013) - Fixed issue with bad clientExecURL in Income Growth report. (JD)
+    (#2016) - Fixed issues in XML when using the character (&) in the Organization name on LinkPoint. (JD)
+    (#2019) - Added some error handlers in the eWay plugin. (JD)
+    (#2042) - Added date filters to the Customer Data CSV and Invoice Data CSV Exporters. (JD)
+    (#2046) - Added 'Ignore Mount Point Errors' setting to Server Status service. (MG)
+    (#1541) - Added new Import plugin to import WHM Packages. (MG)
+    (#2054) - Added new Import plugin to import WHM Accounts. (MG)
+
+* Billing
+    (#1991) - Added new setting "Display Successful Invoice Payment Transactions" to allow displaying the successful invoice payment transactions in the public invoice details, as well as the PDF. (JD)
+    (#2017) - Removed unneeded dash in the dates in the PDF. (JD)
+    (#2018) - Added plugin name to the PDF invoices. (JD)
+    (#2033) - Added a new button to generate next recurring invoice for a selected customer. (JD)
+    (#2011) - Added half day to the next bill date, just in case of a beginning or ending of Daylight Saving Time, to avoid issues. (JD)
+    (#2014) - Added missing permission in the Events tab when viewing the invoice details. (JD)
+    (#2015) - Now, displays paypal as the plugin to be used with an invoice with subscription, in the invoices list. (JD)
+    (#2022) - Allow to create paypal subscriptions with invoices that are not related to packages. (JD)
+    (#2041) - Added new setting "Show Currency Code", which will show the currency code as well as the symbol (to distinguish between USD, CAD, etc) (MG)
+    (#2048) - Added some error messages in the summary when unable to process credit cards. (JD)
+    (#2049) - Updated refunds to use the plugin used to pay the invoice. (JD)
+    (#1632) - Now you can press Enter to submit the Payment Reference of a Client Invoice. (JD)
+
+* Signup
+    (#1990) - Now if using a direct link, and only having 1 payment term for the product, it will forward you to step 2. (JD)
+    (#2020) - Added translations for registrar extra attributes. (JD)
+    (#2031) - Fixed bug with country code lookups that was causing step 3 to lag. (MG)
+    (#1948) - Added a valid error message if a user attempts to look up a blank domain. (MG)
+    (#2052) - Added new Order Pages setting to hide Choose Your Payment Method section when placing a free order (Total Amount 0). (JD)
+
+* Clients
+    (#1884) - Fixed page title on customer invoices page not displaying properly. (MG)
+    (#2028) - Fixed send invoices and receipts from customer login. (JD)
+    (#2038) - Added currency field (hidden by default) to client list. (MG)
+    (#2039) - Added package count field (hidden by default) to client list. (MG)
+    (#2037) - Added the next due date of a package to the package cancellation type drop down for "End of Billing Period". (MG)
+    (#2040) - Added the ability to have subjects for each client note. (MG)
+    (#1906) - Now sorting packages by name in customer side, sorts them by domain name. (JD)
+    (#2009) - Added some missing lang calls in the invoices grid. (JD)
+    (#2021) - Added billing details to the addons information on the product details in the customer profile. (JD)
+    (#2024) - Added billing details and coupons information on the product details in the customer profile. (JD)
+    (#2023) - Do not allow an admin to merge a client to itself. (MG)
+    (#2026) - Added the ability to update the VPS ID stored in Clientexec for a SolusVM package. (MG)
+
+* Support
+    (#1882) - Fixed page title on support tickets not displaying properly. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.3.3
+* System/Admin
+    (#1984) - Removed un-needed information from json responses. (MG)
+    (#1986) - Fixed issue with recaptcha (MG)
+    (#1987) - Fixed Security Issue.  More details to be released at a later date. (MG)
+    (#1996) - AddonsController.php is no longer encoded. (MG)
+    (#1998) - Fixed issue with the "View Pending Orders" permission. (MG)
+
+* Clients
+    (#1980) - Fixed issue with user package custom field identifier not showing the proper display for drop down options. (MG)
+    (#1983) - Fixed issue preventing some events from displaying on the events list. (MG)
+
+* Plugins
+    (#1981) - Fixed issue with auto mailer service not showing the full customer name in the summary email. (MG)
+    (#1993) - Fixed issue in Monthly Income & Monthly Income By Type to show proper values for addons. (JD)
+    (#1997) - Added Organization name to PlanetDomain. (JD)
+    (#1999) - Fixed issue with server status links ion phpsysinfo. (JD)
+
+* Signup
+    (#1985) - Updated randomly generated passwords to be longer on sign up. (MG)
+
+* Knowledgebase
+    (#1982) - Fixed issue with SEO links in latest articles and popular articles. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.3.2
+* System/Admin
+    (#1966) - Updated Advanced & Plugin Settings tab on hosting products to show the settings that only applies to resellers, only if it is a Reseller Package. (JD)
+    (#1970) - Added new permission to View and Delete Events. (MG)
+    (#1877) - Added event logs for Reset Passphrase and Delete Passphrase. (JD)
+
+* Clients
+    (#1967) - Allow to send Welcome Emails, even if Trigger Package Actions is disabled. (JD)
+    (#1968) - Added new permission to "View Pending Orders". (MG)
+    (#1969) - Only show the automation status if the staff member has access to manage plugins. (MG)
+    (#1978) - Fixed Security Issue.  More details to be released at a later date. (MG)
+
+* Plugins
+    (#1973) - Add a new testing condition for strtotime when updating domain expiration date in Domain Updater service (MG)
+    (#1975) - Fixed issue with domain updater not getting the proper transfer id (MG)
+    (#1976) - Fixed issue with name silo not properly marking a transfer as complete (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.3.1
+* System/Admin
+    (#1923) - Fixed issue with Domain importer using the wrong Plan variable. (JD)
+    (#1928) - Fixed issue in coupons to not display a date when the date is supposed to be empty. (JD)
+    (#1929) - Added additional validation to avoid deleting a Billing Type when it is in use by a Recurring Fee. (JD)
+    (#1930) - Removed permission check to allow all the staff to properly use the search tool. (JD)
+    (#1952) - Added translations for invoice entry description and details on PDF. (JD)
+    (#1954) - Added some missing translations. (JD)
+    (#1956) - Added status dropdowns to users and packages in notifications window. (JD)
+    (#1957) - Fixed issue with package custom fields of type date with empty dates. (JD)
+
+* Plugins
+    (#1931) - Adding a User-Agent information to the header of the callback confirmation request of a paypal transaction, to avoid issues with some countries. (JD)
+    (#1933) - Fixing issue with recalculate invoice, when used by the late fee plugin over an invoice that has partial payments, that was removing the amount paid to date. (JD)
+    (#1934) - Some style changes to the Quantum Vault interface in the customer side. (JD)
+    (#1936) - Added description for Quantum Vault in the Choose Your Payment Method section when taking a look at an invoice as a customer. (JD)
+    (#1937) - Some updates to the getDirectLink function, to avoid lag when loading lots of products in the customer side. (JD)
+    (#1942) - Fixed issue with Email Routing Rules not properly working when using more than one email on the rule. (JD)
+    (#1955) - Fixed logic of date field Was Exactly for Auto Mailer service plugin. (JD)
+    (#1963) - Fixed autosuspender to avoid oppening multiple tickets about the same package evey time it runs. (JD)
+
+* Reports
+    (#1951) - Added new report Predicted Income and cleanned some code on report Income Growth. (JD)
+
+* Billing
+    (#1932) - Avoid validating VAT if it is empty. (JD)
+    (#1935) - Failed Invoices filter will now only take in count the latest transaction. (JD)
+    (#1909) - SSL Addons now allows billing cycles up to 3 years. (JD)
+    (#1908) - SSL Certs are now only for up to 3 years. (JD)
+    (#1905) - Admins can now Clone invoices. (JD)
+    (#1926) - Fixed issue with failed invoice drop down showing wrong data. (MG)
+    (#1953) - Fixed Outstanding Amount calculation. (JD)
+
+* Clients
+    (#1964) - Fixed blind SQL injection on invoice & product list. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.3.0
+* System/Admin
+    (#1678) - Added new setting for Enabled Languages, to determine which languages should be enabled for use. (MG)
+    (#1772) - Added pending orders table to admin dashboard. (MG)
+    (#1770) - Added new permissions to disable certain dashboard counts per admin. (MG)
+    (#1621) - Added new check to installer to ensure cURL has support for SSL. (MG)
+    (#1774) - Added default routing rule for public section to new installs. (MG)
+    (#1781) - Enable "Pin the active customer on right panel" and "Show expanded menu for Settings" admin preferences when creating new admins. (MG)
+    (#1759) - Fixed bug with Spanish translation of 'Login using your registered account'. (MG)
+    (#1760) - Fixed bug with logo box being duplicated when changing templates on Customize HTML. (MG)
+    (#1762) - Fixed bug with changing credit card passphrase when it contains certain special characters. (MG)
+    (#1787) - Updated the way we store extra attributes for TLDs to be a base64 encoded serialized array. (MG)
+    (#1667) - Added multiple language support to products. (JD)
+    (#1824) - Included multiple language configuration when cloning a product. (JD)
+    (#1668) - Added multiple language support to addons. (JD)
+    (#1666) - Added multiple language support to email templates. (JD)
+    (#1688) - Added new staff permission to delete customers. (MG)
+    (#1813) - Changed references of client to customer. (MG)
+    (#1816) - Fixed a bug with the top bar today's stats showing information to staff that should not be able to see it. (MG)
+    (#1821) - Switched the position of save and delete buttons on custom fields view. (MG)
+    (#1822) - Added a Password type for product custom fields. (MG)
+    (#1823) - Added links to customer and package in event logs. (MG)
+    (#1817) - Fixed error showing on dashboard if the logged in staff member does not have access to the ticket list. (MG)
+    (#1826) - Changed header title in the window when editing an email template. (JD)
+    (#1857) - Changed header title in the window when editing a notification. (JD)
+    (#1825) - Added some warnings when trying to delete a product addon that is associated to a product which is already in use. (JD)
+    (#1855) - The installer/upgrader will no longer error if there are 3rd party plugins in your system. (MG)
+    (#1874) - New domain product groups will have transfer and self manage enabled by default. (MG)
+    (#1872) - Fixed issue with the tooltip on Email Routing Filters been hidden behind the browser top bar. (JD)
+    (#1890) - Allowed ctrl+v and ctrl+c in pricing editor. (MG)
+    (#1891) - Fix top bar ticket count display when there are no tickets to show. (MG)
+    (#1892) - Disable rocket script loading of all public side javascript. (MG)
+    (#1899) - Updated cWhois script to latest version. (MG)
+
+* Support
+    (#1767) - Added new support view to view ticket feedback. (MG)
+    (#1747) - Added new GET parameter to submitticket view "tickettype", to automatically select the ticket type based on the name. (MG)
+    (#1796) - Added elapsed and status to default columns for ticket list grid. (MG)
+    (#1738) - Added a new setting to TicketTypes to determine if a customer is able to close tickets of the type. (MG)
+    (#1777) - Fixed bug with ctrl+clicking a ticket in ticket list, where it would change the original tab to the ticket as well. (MG)
+    (#1805) - Added new API command to create a new support ticket, by POSTing to /api/support/ticket/ (MG)
+    (#1665) - Added multiple language support to the anouncements. (JD)
+    (#1684) - Added multiple language support to the knowledgebase. (JD)
+    (#1811) - Added a new setting to allow for SEO knowledgebase links. (MG)
+    (#1829) - Added the ability to merge 2 or more tickets from the ticket list. (MG)
+    (#1838) - Added an event log when we merge tickets. (JD)
+    (#1842) - Fixed error with ticket search/filter if you do not select any conditions. (MG)
+    (#1828) - Fixed KB search from the sidebar. (JD)
+    (#1851) - Added more tags to the feedback email. (JD)
+    (#1846) - Added ticket title on the default content of the email template of the ticket feedback email. (JD)
+    (#1854) - No longer delete ticket custom fields when changing a ticket type. (MG)
+    (#1856) - Fixed issue not refreshing the new ticket status in the web browser when replying with an attachment. (JD)
+    (#1907) - Added the ability for a staff member to create an internal ticket on a customer. (MG)
+
+* Billing
+     (#800) - Added new options to allow to enter a date and payment processor when adding a partial payment manually. (JD)
+    (#1795) - Added coupon code to coupon list grid. (MG)
+    (#1635) - Added new "Failed Invoices" filter to invoice list. (MG)
+    (#1669) - Added multiple language support to invoice settings. (JD)
+    (#1806) - Fixed possible bug with setting default currency not working. (MG)
+    (#1810) - Added amount totals for invoices grid. (JD)
+    (#1801) - Updated paypal plugin to allow generate invoices for subscriptions, even if out of the Send Invoice Offset or Charge Domain Invoice Offset. (JD)
+    (#1798) - Fixed issue to make sure manually added domains set as transfer, charge in the first invoice the transfer pricing. (JD)
+    (#1786) - Added a validation to avoid customers to add more payments to invoices that have active transactions about paypal subscriptions even if the payment has not yet been notified. (JD)
+    (#1904) - Added new Diagnostic Report: Remove Invoice Subscription to allow removing the Subscription Id from an invoice that is under a subscription. It only removes the subscription reference and requires the Billing permission: Edit, delete and add invoices. (JD)
+
+* Plugins
+    (#1778) - Show valid error messages with OpenSRS. (MG)
+    (#1802) - Fixed spelling mistake on domain updater service error. (MG)
+    (#1800) - Added new feature to domain updater service to allow to automatically send out domain renewal notices. (MG)
+    (#1789) - Fixed possible bug with the domain updater service setting invalid next bill dates for transfered domains. (MG)
+    (#1790) - Fixed transfer bug with .ca domains in ResellerClub (MG)
+    (#1794) - Send proper currency code when making a payment with 2CheckOut (MG)
+    (#1804) - Added a list of valid approval emails to error message in eNomSSL. (MG)
+    (#1812) - Added a new fraud plugin for FraudLabsPro. (MG)
+    (#1814) - Fixed bug with ResellerClub and ResellBiz not properly canceling domains not in the registrar account with domain updater service (MG)
+    (#1815) - Fixed bug with always showing the resellers tab on Resellers Panel plugin. (MG)
+    (#1809) - Added new server plugin for Weebly (MG)
+    (#1827) - Fixed bug with team status adding if you pressed Cancel. (MG)
+    (#1833) - Added new setting to allow for setting the Page Style while checking out with PayPal. (MG)
+    (#1852) - Change cPanel Plugin Login URL to use cPanel Single Sign On. (MG)
+    (#1847) - Added event logs when the domain updater service updates any information on a domain. (MG)
+    (#1818) - Fixed Package Plugin Actions dropdown for support staff. (JD)
+    (#1766) - Added an optional Status Email setting to Money Bookers plugin. (JD)
+    (#1855) - Added the ability to send the auth code (EPP) to the registrant in OpenSRS. (MG)
+    (#1895) - Fixed bug with CE Format export not properly importing. (MG)
+
+* Clients
+    (#1761) - Added a waiting mask while cancelling packages from cancellation requests view. (MG)
+    (#1757) - Show a proper error message while viewing CSR details if it fails to parse the CSR. (MG)
+    (#1797) - Fixed bug with users not being properly encoded in online/offline users list. (MG)
+    (#1799) - Fixed bug on public side preventing proper error message from being displayed on host receords domain page if the plugin does not support updating host records. (MG)
+    (#1449) - When processing a cancellation request, also cancel the customer if appropriate. (MG)
+    (#1301) - When merging users, it now also adds the user email of the account we are moving from, to the alternate emails of the other account, if selected Delete Client After Merge and either Merge All Data or Merge Alternate E-mails. (JD)
+    (#1878) - Added a language dropdown on client side to allow a client to change the language their session is in. (MG)
+    (#1883) - [CLIENTNAME] email tag will now show "FirstName LastName - Organization". (MG)
+    (#1896) - Packages grid in customer side is now also sortable by name. (JD)
+    (#1902) - Fixed bug with "No" button while cancelling a SSL cert from the SSL list view. (MG)
+    (#1903) - Fixed bug with "No" button while cancelling a Domain, Hosting Package or General Package from their respective list view. (JD)
+
+* Reports
+    (#1605) - Fixed sorting bug on Billing Cycle Report. (MG)
+    (#1765) - Fixed some issues with Monthly Income and Monthly Income By Type reports. (JD)
+
+* Signup
+    (#1819) - Fixed bug preventing sign up from using the selected country if the sign up fails. (MG)
+    (#1820) - Fixed bug preventing the use of TLDs that were longer then 6 characters on self manage domains. (MG)
+    (#1618) - Scroll to the password field on sign up if we show an error message. (MG)
+    (#1849) - Fixed issue with attempting to leave the sign up page by clicking the support link, and nothing happening. (MG)
+    (#1853) - Fixed bug with domain lookup failing if the domain was mixed case. (MG)
+    (#1764) - Fixed some coupon issues in signup for some given configurations. (JD)
+    (#1769) - Updated paypal plugin to also autofill email and phone information when checking out with paypal as a guest. (JD)
+    (#1835) - Fixed issue with the compare prices view in signup to display the amounts properly formatted. (JD)
+
+================================================================================================================
+================================================================================================================
+
+5.2.1
+* Clients
+    (#1705) - Fixed JS error when attempting to delete a pending order. (MG)
+    (#1725) - Fixed bug on client status update, that was still activating packages even if you selected No. (MG)
+    (#1722) - Fixed bug with sorting of colums on package lists. (MG)
+    (#1730) - Fixed bug that was preventing the Initiate Transfer option to properly work. (MG)
+    (#1733) - Fixed possible lock up of user package hosting account tab. (MG)
+    (#1724) - Fixed bug preventing the sorting of pending packages by date. (MG)
+    (#1749) - Fixed bug with cancel button in prompt for updating a user package password on public side. (MG)
+    (#1739) - Added new permissions to control triggering package actions and updating package passwords for customers. (MG)
+    (#1655) - Only show active customer side bar invoice information if the staff member has access to view billing information. (MG)
+    (#1628) - Changed delete customer button to use proper RichHTML prompts. (MG)
+    (#1742) - Fixed domains list overlapping when left side bar is open. (MG)
+
+* System/Admin
+    (#1706) - Only show the default currency in todays stats on the dashboard. (MG)
+    (#1713) - Fixed spelling mistake on installer. (MG)
+    (#1711) - Fixed missing DejaVuSansCondensed-Oblique.ttf font file for PDF invoices. (MG)
+    (#1715) - Fixed bug with showing a client logged in, when an admin is viewing as that client. (MG)
+    (#1701) - Fixed confusing tool tip on general products bundled option. (MG)
+    (#1731) - Add missing translations for page titles. (MG)
+    (#1704) - Delete version update cache after a successful update so we show the proper version in the page footer. (MG)
+    (#1744) - Moved bodyHTML back to being output right after the body tag on public side template. (MG)
+    (#1750) - Handle no date.timezone being set in php.ini better during installs. (MG)
+    (#1751) - Do not send security e-mails for "no action param" or "session hash missing" errors. (MG)
+    (#1685) - Update auto-upgrade to also warn about modified language files. (MG)
+    (#1646) - Add Full Name to the TO address when sending out emails. (MG)
+    (#1606) - Added a default subject name to the default shared web hosting welcome email. (MG)
+    (#782)  - Added a search button to KB search sidebar plugin (MG)
+    (#1758) - Fixed bug that would not allow the updating of a product group list style. (MG)
+
+* Billing
+    (#1707) - Allow the full package identifier to be shown in invoice entries on PDF invoice. (MG)
+
+* Plugins
+    (#1708) - Fixed bug with OpenSRS domain lookups failing. (MG)
+    (#1714) - Fixed bug with AutoClose service erroring about logtype. (JD)
+    (#1716) - Fixed spelling mistake in purchase status for OpenSRS. (MG)
+    (#1717) - Fixed spelling mistake in invoices to process service. (MG)
+    (#1719) - Fixed grammar mistake in invoices to process description. (MG)
+    (#1726) - Updated domain updater service to handle domain transfers, and check if they have been completed. (MG)
+    (#1734) - Do not try to get an account summary when there is no username set, for cPanel. (MG)
+    (#1693) - Fixed bug with eNom plugin only showing the first error message, instead of all. (MG)
+    (#1664) - Fixed possible bug with WHMCS import creating duplicate products. (MG)
+
+* Signup
+    (#1735) - Fixed possible bug showing "There was an error looking up that domain" instead of the domain being taken when using both Name Suggest and NameSpinner. (MG)
+
+* Support
+    (#1745) - Changed assigned package dropdown in ticket view to be a scrollable dropdown (MG)
+    (#777)  - Changed assigned staff and ticket type dropdown in ticket view to be a scrollable dropdown (MG)
+
+* Knowledgebase
+    (#1681) - Fixed bug with global series not showing global series articles in navigation. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.2.0
+* Plugins
+    (#1529) - Added the name parameter as a parameter we send when charging a card with the Stripe plugin (MG)
+    (#1532) - Added the ability to import Credit Card data from WHMCS. (MG)
+    (#1570) - Fixed "unknown protocol" SSL issue with the PSiGate gateway plugin. (MG)
+    (#1580) - Fixed issue when cancelling a paypal subscription and the customer was already cancelled, it was not resetting the recurring fee. (JD)
+    (#1581) - Fixed issue when trying to create a subscription and the recurring price is 0. (JD)
+    (#1257) - Added NameSpinner support to eNom plugin. (MG)
+    (#1239) - Added new NameSilo registrar plugin. (MG)
+    (#1525) - Added new Resell.biz registrar plugin. (MG)
+    (#372)  - Order Processor plugin now avoids to activate new packages with all invoices void. (JD)
+    (#1393) - Added new service Invoices To Process Today. When enabled, an email will be sent to the provided email addresses, notifying about how many invoices needs to be processed today. If there are no invoices needing to be processed today, no email will be sent. (JD)
+    (#1392) - Dont apply late fee if we havent tried to charge the CC. (JD)
+    (#1573) - Added CVV to Stripe. (JD)
+    (#1582) - Auth.net now logs the cURL error if there is one. (JD)
+    (#1589) - Fix contact types with certain TLDs. (MG)
+    (#1590) - Added support for enabling SPF/DKIM on cPanel Accounts. (MG)
+    (#1603) - Fixed bug with cPanel direct link not working properly when there are multiple hosting packages. (MG)
+    (#1609) - Fixed bug with eNomSSL purchasing wrong certificate type for QuickSSL Premium. (MG)
+    (#1617) - Eway plugin should assign the invoice number to the Invoice Ref#. (JD)
+    (#1625) - Pass proper purpose/category values when registering a .us domain with ResellerClub. (MG)
+    (#1288) - Added new Snapin to add an "Invoices" tab to a user package. (MG)
+    (#1085) - Removed egold gateway plugin. (MG)
+    (#1181) - Added summary email on the Invoice Reminder service plugin. (JD)
+    (#1647) - Fixed invalid XML while updating an OpenSRS domain's name servers. (MG)
+    (#1651) - Fixed issue with OnlineNIC returning an error when you register a domain. (MG)
+    (#1698) - Fixed issue with creating cPanel accounts with special characters in the password. (MG)
+
+* Clients
+    (#1544) - Changed width of columns on public side products list to make it look better. (MG)
+    (#1560) - Fixed bug with showing "Send Welcome Email" action on public side when there was no welcome email for the package. (MG)
+    (#1568) - Added the ability to automatically trigger the register RichHTML Window on the login view (index.php?fuse=home&view=login&register=1) (MG)
+    (#1593) - Fixed bug with updating host records for a domain package. (MG)
+    (#1390) - Added an event log when a domain reminder is sent out manually. (MG)
+    (#1199) - Added additional validation to alternate accounts updating. (MG)
+    (#1208) - Readded the ability to update a hosting package's password on public side. (MG)
+    (#1549) - In the client list, show a client's organization before his name, if he has an organization. Also sort by organization as well. (AP)
+    (#1052) - Added event when merging customers. Also adds the main email of the merging customer, to the alternate emails of the merged one. (JD)
+    (#1597) - Added a "Canceled Domains" filter to domains list. (MG)
+    (#1598) - Added a "Canceled Certificates" filter to SSL list. (MG)
+    (#1584) - Added additional mass action buttons to package and users lists. (MG)
+    (#1500) - Added credit balance and unpaid balance to the right side active customer panel. (MG)
+    (#1615) - Fixed possible bug with updating a clients billing details while loading over CloudFlare (MG)
+    (#1619) - Trim any whitespace from the domain name when adding a new user package. (MG)
+    (#1626) - Fixed displaying Extended Attributes on admin package view for domains. (MG)
+    (#1637) - Show proper error message while trying to edit host records if the plugin does not support this. (MG)
+    (#1622) - Fixed the display order of user custom fields on admin profile. (MG)
+    (#1640) - Readded the ability to change the FROM address when manually emailing a client. (MG)
+    (#1649) - Added missing translations on alt e-mail view on client side. (MG)
+    (#1695) - Fixed bug with actions column being improperly removed from client side products list. (MG)
+    (#1699) - Changed client side dashboard to only show an excerpt of the announcement, instea of the full post. (MG)
+
+* System/Admin
+    (#1526) - Fixed displaying the path to SupportPipe.php when the admin directory is not "/admin" (MG)
+    (#1530) - Show the expiration date in the proper date format when importing domains. (MG)
+    (#1542) - Allow for our default custom fields to be translated. (MG)
+    (#1565) - Ensure that deprecated errors are not logged or treated as a real error. (MG)
+    (#1569) - Added the ability to disable a TLD transfer period by leaving the price field blank. (MG)
+    (#1572) - Ensure eNom password is not shown in internal logging. (MG)
+    (#1588) - In the dashboard 'Todat at a Glance' table, Revenue entries with an html-encoded currency display badly, or simply break the dashboard. (AP)
+    (#1241) - Removed branding from chat popout if the instance has no-branding attribute. (MG)
+    (#1510) - Continously update the 'Today at a Glance' dashboard component. (AP)
+    (#1524) - Automated upgrades: when calling install.php, you'll be able to download and apply upgrades to Clientexec. (AP)
+    (#1539) - Added the SSL Certificate Domain to package list as well as invoices. (MG)
+    (#1540) - Decreased the width of the Monthly Cost column on the servers list. (MG)
+    (#1574) - Avoid infinite loop on invoices when something fails on processing or generating. (JD)
+    (#1575) - Updated Notifications to allow filter by invoices. (JD)
+    (#1554) - Replaced multiple service.php crontab entries with a single cron.php crotab entry. (AP)
+    (#1591) - Moved package variables above reseller variables in Advanced & Plugin Settings tab of a product. (MG)
+    (#1620) - Updated comments in SupportPipe.php to explain customizing support piping. (MG)
+    (#1679) - Updated the minimum results needed to show a search in all select boxes to be 10 instead of 35. (MG)
+    (#1683) - Fixed translations of period in TLD price edit window. (MG)
+    (#1696) - Fixed bug that could cause announcement images to be deleted. (MG)
+    (#1697) - Fixed bug that could prevent saving server details when mysql is running under strict mode. (MG)
+    (#1702) - Added the ability see a users real IP instead of CloudFlare IP (MG)
+
+* Support
+    (#1533) - When an admin created a new ticket for a user without checking 'Notify user', the user was still receiving a notification. (AP)
+    (#1536) - Searching tickets always showed closed tickets, regardless of the state of the 'Include Closed Tickets' checkbox. (AP)
+    (#1535) - Support ticket feedback comments didn't have a success message. (AP)
+    (#1543) - When staff entered an internal message in a ticket, selecting a different status while submitting wasn't working. (AP)
+    (#1528) - Changed Reply button to green on client side ticket view. (MG)
+    (#1396) - Add ticket rating feedback back into ticket. (AP)
+    (#1551) - Avoid having a staff member with the same email as a routing rules, as this can cause infinite mail loops. (AP)
+    (#1563) - Added tags to canned responses. (AP)
+    (#1564) - Added smart date tag to canned responses tags. (AP)
+    (#1558) - In the ticket log, also track addition/deletion of attachments. (AP)
+    (#1567) - Updated routing rule text about public section, removing the reference to "/public". (MG)
+    (#1585) - Fixed some issues with the routing rules to use the Send Copy To when getting replies. (JD)
+    (#1627) - Added two new conditions to ticket search: "Custom Field"  & "Custom Field Value". (MG)
+    (#1630) - When first responding to a ticket, don't auto-assign unless the 'Assign ticket to replier' setting is on. (AP)
+    (#1662) - Attachments to internal messages are no longer displayed publicly in support tickets. (JD)
+    (#1682) - Fixed bug with pagination and KB category viewing on admin KB article list. (MG)
+    (#1690) - Fixed bug with ticket attachments not showing if the ticket was closed on client side. (MG)
+    (#1692) - Fixed bug with showing a blank lead in ticket type assignment drop down if a department did not have a lead. (MG)
+
+* Signup
+    (#1583) - Addons with percentage signs in their name were causing a fatal error during signup. (AP)
+    (#1481) - TLD prices should include the currency. (AP)
+    (#1559) - Fixed bug with new order email not showing all the fraud information if more then one plugin was enabled. (MG)
+    (#1503) - Fixed issue with Product List Style, when Product Group is not set to Include in Signup. (JD)
+    (#1576) - Some fixes on signup to redirect to the start of Order if a product is out of stock. (JD)
+    (#1028) - Domain Addons are now forced to use the billing cycle of the Domain. Domain Addons now also support billing cycles up to 10 years. (JD)
+    (#1663) - New signup purchases now allows to be paid with account credit. (JD)
+
+* Billing
+    (#1531) - Added validation to ensure a payment method is selected when trying to pay an invoice on client side. (MG)
+    (#1537) - Changed default PayPal subscription setting under billing tab of a users profile to reflect the "Paypal Subscriptions Option" setting. (MG)
+    (#1566) - Fixed bug with billing menu count being wrong if a number had a comma in it. (MG)
+    (#1571) - Fixed bug with PDF Invoices if ini_set was disabled. (MG)
+    (#1444) - Invoice Description for a UserPackage now includes the full identifier. (JD)
+    (#1577) - Included invoice notes on the PDF. (JD)
+    (#1578) - Generating invoices are now more faster. (JD)
+    (#1234) - Re-added the ability to associate an invoice entry to a package. (JD)
+    (#1579) - Fixed Process Credit Card Payments to ignore invoices with subscription. (JD)
+    (#1587) - Show total charged in invoice processed summary. (JD)
+    (#1616) - Increased the width of company information on PDF Invoice. (MG)
+    (#1634) - Added a back to coupons list link while adding/editing a coupon (MG)
+    (#1639) - Added a link to validate credit cards on process invoices view (MG)
+    (#1641) - Fixed issue with using single quotes instead of double quotes on invoice status column. (MG)
+    (#1650) - Fixed issue with some languages not showing properly in PDF invoices. (MG)
+    (#1201) - Added tag for transaction number of last paid transaction on PDF and Invoice Email. (JD)
+    (#1660) - Fixed bug where a support ticket was not being created when an inactive client pays an invoice. (MG)
+    (#1489) - Validate product and addon pricing fields to only support numbers and the dot for decimal separator. (JD)
+    (#1686) - Fixed spelling of additional on invoice templates. (MG)
+
+* Reports
+    (#1226) - Wrong days in weekly view of Ticket Review and New Customers dashboard graphs. (AP)
+
+================================================================================================================
+================================================================================================================
+
+5.1.3
+* System/Admin
+    (#1520) - Submit prompts (singled-input popups) by clicking on the Enter key. (AP)
+    (#1523) - Fixed issue with support tickets not loading on admin side. (MG)
+
+* Billing
+    (#1515) - Fixed bug with line breaks in invoice entries in the PDF Invoice. (MG)
+
+* Plugins
+    (#1509) - Changed Plesk10 server plugin to use version 1.6.3.2 of their API. (MG)
+    (#1521) - Fixed PHPSysInfo snapin. (AP)
+
+================================================================================================================
+================================================================================================================
+
+5.1.2
+* Support
+    (#1487) - Ability to track a ticket changes in state, priority and assignee. Show along regular log messages. (AP)
+    (#1490) - Add setting that will automatically assign a ticket to the replier. Including internal notes. (AP)
+    (#1502) - Moved the Close Ticket button to the left side of the screen on public side ticket view. (MG)
+    (#1504) - Fixed bug with tickets displaying attachments where the file had been deleted. (MG)
+    (#1508) - When looking at a ticket in admin, when the status is changed from closed to open, show the reply box without having to reload. (AP)
+
+* System/Admin
+    (#1467) - Updated text on TLD Period Editor Window. (MG)
+    (#1477) - Added ability to translate help widget and chat widget. (AP)
+    (#1472) - Fixed image displays in announcements. (MG)
+    (#1486) - Fixed imporper error message when adding a user with an invalid password. (MG)
+
+* Clients
+    (#1473) - Hide Actions column in Products list in client portal when there's nothing to show. (AP)
+    (#1491) - Fixed bug with previous / next buttons on announcements showing unpublished announcements. (MG)
+    (#1501) - Use the proper date format when showing the expiration date of domains. (MG)
+    (#1461) - Add language dropdown on public customer profile. (AP)
+    (#1499) - Fixed display bug with adding a package to a user and switching from domain to hosting type. (MG)
+    (#1507) - Allow non-custom fields in users list (nickname, phone, org, etc) to be displayable. (AP)
+    (#1510) - Continously update the 'Today at a Glance' dashboard component. (AP)
+    (#1511) - Added the ability to automatically provision SSL packages. (MG)
+    (#1519) - Add setting to allow custom logo in portal. (AP)
+
+* Plugins
+    (#1464) - Added 'Automatically Renew Domain' to the list of ResellerClub Supported Features. (MG)
+    (#1483) - Fixed bug with Transaction view not loading properly if no transactions were there. (MG)
+    (#1488) - Fixed bug with Auto Suspend Service that was unsuspending packages for non-active users. (MG)
+    (#1251) - Clarify enable unsuspension setting on auto suspend service. (MG)
+
+* Signup
+    (#1480) - Fixed bug with showing the wrong price for domain transfers on step 1 of signup. (MG)
+    (#1482) - Fixed bug with signup sometimes not properly marking a cancelled account as pending. (MG)
+    (#1506) - Fixed bug with unwanted note while removing a product from your cart. (MG)
+    (#1513) - Fixed bug with "Disable Registrations" setting for domain product groups. (MG)
+    (#1518) - Add signup setting to hide setup fees. (AP)
+
+* Billing
+    (#1514) - Fixed bug with billing types being cut off while adding/editing an invoice entry. (MG)
+    (#1517) - Invoice batch processing was being halted if there was a problem sending an email. (AP)
+
+================================================================================================================
+================================================================================================================
+
+5.1.1
+* Support
+    (#1455) - In the Events profile tab (and the dashboard), show ticket assignation events. Also improved that event description by linking to the corresponding ticket. (AP)
+    (#1459) - Only show "Latest Articles" tab on main page if there are articles to display. (MG)
+    (#1458) - Fix bug with the red asterisk on ticket custom fields showing when it shouldn't. (MG)
+    (#1368) - Fix bug that was displaying an empty drop down in a ticket if the customer had no packages. (MG)
+    (#1469) - Fixed problem with support ticket notifications when using email piping and when sending transcriptions. (AP)
+
+* Signup
+    (#1447) - Fix bug with signup breaking if no product groups are able to be shown. (MG)
+    (#1448) - Fix wording of error message when there are no products to show on signup. (MG)
+
+* System/Admin
+    (#1460) - Language dropdown in customer profile (admin-side) wasn't showing the user's language. (AP)
+    (#1462) - Whenever new language files (core-X.mo and javascript-X.mo) files are added under the language directory, the system will automatically make them available, no extra setup needed. (AP).
+
+* Plugins
+    (#1453) - CE Transactions snap-in is now unencoded. (MG)
+    (#1435) - Added currency to transaction list. (MG)
+
+* Clients
+    (#1451) - Updated Cancellation Date custom field to be Cancellation Request Date. (MG)
+    (#1438) - In the client portal dashboard, show announcements excerpts instead of contents. (AP)
+
+* Billing
+    (#1319) - Fixed bug with invoice buttons not resetting on error (MG)
+    (#1463) - Added ability for the autosuspend service to create a closed ticket (and notify user) when package is cancelled. (AP)
+
+================================================================================================================
+================================================================================================================
+
+5.1.0
+* Support
+    (#1216) - Fixed some encoding issues (in non-English languages) in support notification emails. (AP)
+    (#1222) - Fixed bug with case sensitive file uploads in admin support ticket. (MG)
+    (#1235) - Canned responses list not working under certain MySQL configs. (AP)
+    (#1256) - Added sidebar plugin for listing ticket filters. (AP)
+    (#1051) - Added png to the list of default extensions for ticket attachments. (AP)
+    (#168)  - Added Sendmail as new email sending method. We had already one labeled Sendmail but it actually was PHP's mail(). (AP)
+    (#293)  - Added TICKETURL tag to Notify Assignee For Ticket Reply Template. (AP)
+    (#855)  - Convert links in tickets to real external links. (AP)
+    (#1210) - Fixed bug that was removing the staff signature when using a canned reply. (MG)
+    (#1272) - Removed the "Allow Guests To Submit Tickets" setting.  This can be enabled or disabled in the Guest group permission. (MG)
+    (#1303) - New "Package" tab in the ticket details view, showing package information whenever the ticket is linked to a package. (AP)
+    (#1303) - Implemented advanced search abilities for tickets (search by creation dates, by customer and by assignee). (AP)
+
+* System/Admin
+    (#1217) - Fixed bug with stock control showing when adding a new TLD package. (MG)
+    (#1261) - Added a billing setting to allow set the date format of the invoice entries. (JD)
+    (#1093) - Changed subdomain box in edit product to be a multiple select box. (MG)
+    (#851)  - Improved password storing mechanism, using sha256 salted hashes. (AP)
+    (#1167) - Fixed staff permissions requiring "view own profile" to have any other admin permission. (MG)
+    (#1205) - Removed old Manage TLD extensions permission. (MG)
+    (#467)  - Set MySQL's time zone according to the "System Timezone" localization setting. (AP)
+    (#439)  - Added monthly cost and provider to server information. (MG)
+    (#1223) - Added missing translations on add/edit server view. (MG)
+    (#774)  - Migrated language framework to standard Gettext (po and mo files). (AP)
+    (#1236) - New version available text is now linked to the download page. (MG)
+    (#1245) - Updated email parsing to also check for a "delivered-to" header value, before defaulting to the TO header. (MG)
+    (#1240) - Fixed bug with install checks and MariaDB. (MG)
+    (#1248) - Fixed passphrase showing in internal logging when processing invoices. (MG)
+    (#1268) - Reduced the delay of the get vitals call (for menu cache) to 1 second. (MG)
+    (#1233) - Added "Credit Card Invoices Ready" to the "Needs Your Attention" menu. (MG)
+    (#1373) - Readded today's revenue to Today at a Glance. (MG)
+    (#1394) - The announcement's grid in admin had pagination disabled. (AP)
+    (#1403) - Add support for certain data grids to hide/show columns. (AV)
+    (#1404) - Add new settings view, grouping the settings in a more user friendly way for new timers to CE.   Preference was also introduced that allows toggling the advanced settings menu (AV)
+    (#1417) - Improve date-related fields in notifications rules. (AP)
+
+* Billing
+    (#1200) - Fixed bug with sort saving on invoice list. (MG)
+    (#1207) - Now when adding a new entry to an invoice, it is set as taxable by default when apply. Same for recurring fees. (JD)
+    (#1213) - Repair recurring fees and invoices that have a subscription id when they should not. (JD)
+    (#1249) - Added proper error message when processing invoices. (MG)
+    (#1283) - Ability to create invoice templates.  Assign default system template and then ability to override which template to use customer by customer. (AV)
+    (#1284) - Included default (clean), dickey, and harouth invoice templates. (AV)
+    (#1282) - Fixed bug with gateway created tickets not being marked internal (MG)
+    (#1221) - Fixed some issues on the invoice view on admin. Now when adding a new entry, the currency symbol is properly shown. Also the  calculations on the invoice are now fine. (JD)
+    (#1287) - Invoice transactions were added as a global view.  Listing all customer's invoice transactions. (MG)
+    (#1375) - Don't send overdue invoice reminders for invoices that were not attempted to be charged (JD)
+    (#1442) - Fixed bug that was not allowing HTML in the "additional notes" section for invoices. (MG)
+    (#1443) - Invoice templates are now properly not encoded. (MG)
+
+* Clients
+    (#1199) - Added validation to alternate accounts on public side. (MG)
+    (#115)  - In the clients list, when expanding an item show the client's outstanding balance. (AP)
+    (#488)  - Added new setting in a user's package to ignore/override auto suspend. (MG)
+    (#709)  - Added the ability to use a canned reply when opening a ticket for a user. (MG)
+    (#1224) - Added autocomplete off to user profile edit page. (MG)
+    (#1238) - Readded the ability to search for alt accounts in global search. (MG)
+    (#1247) - Clean up the passphrase popup when validating a credit card on the users list. (MG)
+    (#1250) - Added the ability to update a hosting package's server if update on server is unchecked. (MG)
+    (#1270) - Fixed bug with recurring profile tab count, not taking into account recurring fees that are not associated with a package. (MG)
+    (#1271) - Fixed bug where we were not always showing the EPP Code of a domain. (MG)
+    (#1285) - Removed "Last Login" from active customer panel if there isn't one to show. (MG)
+    (#1289) - Added the ability to directly login to a user package's control panel (MG)
+    (#1327) - Added setting 'Column in portal' for package custom fields, to show a field in a customer's package table in the client portal. (AP)
+    (#1336) - Added setting to be able to show a customer's product list in his client portal dashboard instead of under its own separate section. Triggered by new setting under the Style settings. (AP)
+    (#1365) - Fixed bug with updating credit card when edit payment method permission is disabled (MG)
+    (#1260) - Added back ability to BCC oneself when emailing customer (using the sidebar email button). (AP)
+    (#1287) - Invoice transactions were added as a new client tab. (AV)
+    (#1413) - When a customer has an organisation, show it next to his name instead of just showing the organization (when viewing his profile, in the sidebar, in grids, and in the invoice view). (AP)
+    (#1400) - Properly set the default currency when registering a guest user. (MG)
+    (#1401) - When registering a guest user, ensure they are forced to update their profile on first login. (MG)
+    (#1440) - Fixed bug showing "View Server Deta" on main page. (MG)
+
+* Plugins
+    (#463)  - Added Test Connection functionality to SolusVM. (MG)
+    (#1230) - Added permissions to service plugins to limit what can be shown on the dashboard under automation summary. (MG)
+    (#517)  - Added Late Fee service plugin. (JD)
+    (#890)  - Added renew ability to ResellerClub registrar plugin. (MG)
+    (#1263) - Fixed earlier PayPal subscriptions to not make the subscription payment look like there is a prorate. (JD)
+    (#1290) - Updated cPanel Plugin with the ability to login directly to the control panel (MG)
+    (#1291) - Updated SolusVM Plugin with the ability to login directly to the control panel (MG)
+    (#1380) - Added the ability to perform a credit with linkpoint (MG)
+    (#1382) - Added CVV checking to linkpoint (MG)
+    (#1386) - Updated CC Payments Processor service to update the value for the last time the batch was run (MG)
+    (#1419) - Fixed bug with OpenSRS and HTML entities in Organization Name. (MG)
+    (#1445) - Fixed bug causing PHPSysInfo Snapin to not show any information. (MG)
+
+* Signup
+    (#1188) - Added regex validation to subdomain field. (MG)
+    (#1229) - Readded saved percentage to default style list of packages. (MG)
+    (#1266) - Added proper domain regex validation for sub domains and self-management domain, when bundling domains. (MG)
+    (#1344) - Added new Signup Social settings, to be able to show Facebook, Google+ and Twitter sharing buttons at the end of checkout. (AP)
+    (#1379) - Fixed remove button on cart summary to ensure that the bundled product is also removed. (MG)
+    (#1381) - Fixed a bug that allowed a customer to by-pass the first package in a bundle. (MG)
+    (#1214) - Fixed bug with sub-domain options showing when there were no sub-domains. (MG)
+    (#1218) - Fixed display bug with TLD Extra Attributes on sign up. (MG)
+    (#1231) - Removed hosting password from new order notification email (MG)
+    (#1418) - Added new event log for a customer agreeing to Terms of Service. (MG)
+
+* Knowledgebase
+    (#1243) - Fixed undefined title on KB article images. (MG)
+    (#1276) - Add KB series support for categories. (AV)
+    (#1277) - Add Global Series support with KB categories. (AV)
+    (#1278) - Categories can now be ordered. (AV)
+    (#1279) - Public articles support highlight.js for pre and codeblocks (AV)
+    (#1296) - Fixed bugs with edit/delete button for kb categories. (MG)
+    (#1359) - If KB Setting 'Number of Latest Articles' is 0 then don't show the Latest Articles tab in the client portal. (AP)
+
+================================================================================================================
+================================================================================================================
+
+5.0.2
+* Clients
+    (#1057) - Don't show Add User button when current user has no permissions to add user. (AP)
+    (#1075) - Added success message when merging a customer. (MG)
+    (#1095) - Fixed recurring fee profile count. (MG)
+    (#1120) - Fixed SQL Injection on Advanced Search. (MG)
+    (#1121) - Fixed XSS on client notes. (MG)
+    (#1169) - Fixed input validation flaw on alternate accounts. (MG)
+    (#1170) - Fixed XSS on alternate accounts. (MG)
+    (#1171) - Fixed input validation flaw on domain host records. (MG)
+    (#1172) - Fixed input validation flaw on domain nameservers. (MG)
+    (#1204) - Added new tag [NAMESERVERIPS] to package welcome emails, to only show name server IPS. (MG)
+
+* System/Admin
+    (#833) - Non-admin staff with permission to manage plugins wasn't able to do so. (AP)
+    (#827) - Hide Products->Custom Fields menu item when user doesn't have permissions to manage custom fields. (AP)
+    (#1082) - Updated how we handle automatic renewing domains when an invoice is paid.  We now assume we should renew as long as the package is active. (MG)
+    (#1086) - Install/setup process wasn't allowing memory_limit=-1 (unlimited memory). (AP)
+    (#1100) - Added additional space before admin signature when opening the email window to a customer. (MG)
+    (#1099) - Fixed bug with validating password when creating a new staff member. (MG)
+    (#835) - Fixed bug with "View reports that are not public" not working properly. (MG)
+    (#1113) - Changed file permissions on config.php to default to 660. (MG)
+    (#1114) - Changed file permissions on uploads directory to default to 755. (MG)
+    (#1118) - Fixed XSS on events list. (MG)
+    (#1119) - Fixed XSS on quick search. (MG)
+    (#1124) - Fixed ACL failure on adding annoucements. (MG)
+    (#1125) - Fixed ACL failure on publishing annoucements. (MG)
+    (#1127) - Fixed ACL failure on adding a new notification. (MG)
+    (#1128) - Fixed ACL failure on enabling a notification. (MG)
+    (#1129) - Fixed ACL failure on disabling a notification. (MG)
+    (#1130) - Fixed ACL failure on resetting a notification. (MG)
+    (#1139) - Fixed ACL failure on settings update. (MG)
+    (#1141) - Fixed ACL failure on adding a ticket customer field. (MG)
+    (#1142) - Fixed ACL failure on site widget settings. (MG)
+    (#1151) - Fixed SQL injection on email templates. (MG)
+    (#1152) - Fixed ACL failure on adding email templates. (MG)
+    (#1153) - Fixed ACL failure on editing email templates. (MG)
+    (#1154) - Fixed ACL failure on deleting email templates. (MG)
+    (#1155) - Fixed ACL failure on generating application key. (MG)
+    (#1157) - Fixed ACL failure on customize HTML. (MG)
+    (#1158) - Added new permission to Manage Customer Groups. (MG)
+    (#1159) - Fixed SQL injection on edit product group. (MG)
+    (#1160) - Fixed ACL failure on edit products. (MG)
+    (#1161) - Fixed ACL failure on cloning products. (MG)
+    (#1162) - Fixed ACL failure on adding addons. (MG)
+    (#1163) - Fixed ACL failure on editing addons. (MG)
+    (#1164) - Fixed ACL failure on viewing import options. (MG)
+    (#1165) - Fixed ACL failure on viewing export options. (MG)
+    (#1107) - Fixed bug with editing the type of a product group. (MG)
+
+* Billing
+    (#1008) - Update today's counts of invoice information to filter by the active customer if there is one. (MG)
+    (#1080) - If an invoice entry has start and end dates, include them in the INVOICEDESCRIPTION email template tag (AP).
+    (#1088) - When generating invoices, generate every invoice from recurring fees that are many cycles late. (JD)
+    (#1108) - Fixed issue with 2checkout plugin not supporting amounts greater than 999. (JD)
+    (#1109) - Fixed issue with 2checkout plugin always marking demo transactions as FRAUD. (JD)
+    (#1187) - Fixed issue with invoice decodeInvoiceHash not been static. (JD)
+    (#1191) - Fixed issue with subscriptions and different Billing Offsets causing to generate 2 different invoices. (JD)
+    (#1131) - Fixed ACL failure on invoice list view. (MG)
+    (#1132) - Fixed XSS on invoice transactions. (MG)
+    (#1143) - Fixed ACL failure on adding a new billing type. (MG)
+    (#1144) - Fixed ACL failure on editing a billing type. (MG)
+    (#1145) - Fixed ACL failure on deleting a billing type. (MG)
+    (#1146) - Fixed ACL failure on archiving a billing type. (MG)
+    (#1147) - Fixed ACL failure on viewing add/edit coupon view. (MG)
+    (#1148) - Fixed ACL failure on adding new currency. (MG)
+    (#1149) - Fixed ACL failure on editing currency. (MG)
+
+* Support
+    (#1078) - Fix deleting and updating ticket types if you are not a Super Admin. (MG)
+    (#1084) - Added notice when editing the General department, explaining its groups are always hard-coded to the staff groups. (AP)
+    (#1092) - Ticket messages copied to an email set in an routing rule weren't being properly formatted if the original message was not in UTF-8. (AP)
+    (#1096) - Emails coming from some providers weren't being parsed correctly, specially through POP3. (AP)
+    (#1104) - Removed the requirement of being logged in to submit a ticket with a registered email (MG)
+    (#1106) - Fixed bug with assigning a knowledgebase article to all ticket types. (MG)
+    (#1101) - Fixed bug where some escaped HTML was showing in related KB articles of a support ticket (MG)
+    (#1133) - Fixed XSS on KB artile title in KB artiles list. (MG)
+    (#1134) - Fixed ACL failure on viewing kb articles. (MG)
+    (#1135) - Fixed XSS on KB article title on public side main KB view. (MG)
+    (#1137) - Fixed ACL failure on viewing kb comments. (MG)
+    (#1140) - Fixed ACL failure on editing ticket type. (MG)
+    (#1176) - Fixed input validation on ticket custom fields. (MG)
+    (#1177) - Fixed input validation on kb article rating. (MG)
+    (#1178) - Require guests who are using a registered e-mail and commenting on a KB article to login first. (MG)
+    (#1183) - New emails (through pop3 or piping) that were replies to a deleted ticket were being discarded. Now they generated a new ticket. (AP)
+
+* Signup
+    (#1081) - Fixed issue with signup sometimes not showing an available TLD in the drop down. (MG)
+    (#1087) - Fixed issue where the subdomain value wasn't being required on sign up. (MG)
+    (#1066) - Added the ability to use subdomains as well as a bundled domain in the same step. (MG)
+    (#1091) - Fixed issue with signup dying if no state field was defined. (MG)
+    (#1105) - Added new GET parameter "autoSearchType" to use while passing a domain name and TLD to sign up. (MG)
+    (#1174) - Fixed XSS on coupon entering. (MG)
+
+* Plugins
+    (#1074) - cPanel error events had HTML in the error message. (AP)
+    (#1085) - Removed GoogleCheckout Gateway Plugin. (MG)
+    (#1185) - Updated CCAvenue gateway plugin. (JD)
+
+* Reports
+    (#1138) - Fixed SQL injection in Coupon Summary Report. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.0.1
+* Plugins
+    - Added support for StopForumSpam integration when banning ips.  Instead of waiting the min security warning tries if ip matches plugin fraud ip is banned.  Can also be used during signup. (AV)
+    - Added coupons and server hostname to be imported from WHMCS. (MG)
+    - Live chat includes a work around for nonConflict jquery includes such as wordpress.  Thanks to Kieren for this suggestion (AV)
+
+* Reports
+    - Fixed report Coupon Summary. (JD)
+
+* Clients
+    - Customer profile tabs now have counts to better get a sense of overall customer. (AV)
+    - Added ability to enable a Captcha in the account registration popup. (AP)
+    - Readded "Last Login" to Active Customer Panel. (MG)
+    - Readed the ability to look up domains with the checkdomain action. (MG)
+    - Fixed bug where we were not updating a hosting account password on the server properly. (MG)
+    - Fixed bug with link back to dashboard while viewing public side as an admin. (MG)
+
+* Support
+    - Style had to be fixed for default gravatar images in the assign to other staff member drop down list.  (AV)
+    - Fixed bug when replying to ticket the reply button would overlap top ticket bar. (AV)
+    - Fixed bug on support ticket trying to load a ticket that does not exist. (MG)
+    - Fixed bug when guest user submitted ticket; it was creating a duplicate user in the DB if the user had already entered tickets. (AP)
+    - Fixed bug when editing welcome email template; emails were being sent in plain-text instead of HTML. (AP)
+    - Fixed bug when editing KB articles, some images from other articles were being deleted. (AP)
+    - Readded custom field support to logged in customers viewing their tickets (AV)
+    - "Who is viewing" was still showing, for a few seconds, previous ticket information after switching tickets (AV)
+    - Show time stamps in the proper time zone for tickets (MG)
+    - Fixed bug where we were showing tickets that only had internal messages to customers. (MG)
+    - Fixed bug with sending out more then 1 copy to e-mail from a routing rule, (MG)
+    - Closed today filter will now only include the closed tickets fot that day.  To view all closed tickets a filter can be created (AV)
+
+* Knowledgebase
+    - Fixed bug where users could view draft articles. (MG)
+    (#836) - Some KB permissions (categories/articles/comments management) were not being enforced (AP)
+
+* System
+    - Re-added the ability to View as Customer. (MG)
+    - Added SSL prices to products list. (MG)
+    - Fixed a bug that was causing duplicate TLDs to be added to the same product group during an upgrade. (MG)
+    - Disallow the creation of a new domain product (TLD) with the same TLD already in use in the product group. (MG)
+    - Disallow the deletion of product groups if they still have products assigned to them. (MG)
+    - Fixed bug with updating a users package that was resetting the server. (MG)
+    - Fixed bug with deleting servers still in use not showing an error message. (MG)
+    - Show warning message when trying to access from a banned IP. (AP)
+    - Added "Allow Registration" setting to enable/disable user registration from the login form. (MG)
+    - Added autocomplete off to registrar plugin updates to prevent auto complete of saved form fields. (MG)
+    - Enable/Disable Announcements and Notifications buttons when needed. (JD)
+
+* Billing
+    - Fixed bug with automatically triggering a domain renewal when an invoice was paid. (MG)
+    - Added Draft invoices. (JD)
+    - Able to split invoice entries on new invoices. (JD)
+    - Able to move invoice entries to another existing invoice. (JD)
+    - Able to merge invoices. (JD)
+    - Fixed issue not allowing to request for passphrase when trying to process the invoice when inside the invoice. (JD)
+    - Added back the Invoice BCC setting. (JD)
+    - Now Invoice Balance is 0 if it was negative due to a coupon. (JD)
+    - Now allow to change the status of an invoice with subscription, by overriding the restriction. (JD)
+    - Fixed issue when selecting a billing type when edditing an invoice. Will now update the description and detail of the invoice entry. (JD)
+    - Fixing some currency symbols. (JD)
+    - Fixed issue with recurring fees for addons not been revalidated when changing the package type. (JD)
+    - Now allow to change the price of addon recurring fees. (JD)
+    - Now allow to create tax rules with value 0. (JD)
+    - Fixed issue with prorating and Paypal subscriptions. (JD)
+    - Fixed bug where invoices that apply to a deleted product would product error (AV)
+
+* Signup
+    - Readded the ability to look up domains on signup using cWhois if no registrar plugin is set for the TLD. (MG)
+    - Fixed bug with name suggest returning more TLDs then the configured max. (MG)
+    - Fixed bug with hosting packages and sub domains. (MG)
+    - Fixed possible bug that would prevent sign up from completing if the server could not look up a country code from IP. (MG)
+    - Updated styling for compare style.  Added additional color pallete as well as proper spacing for wrapped packages. (AV)
+    - Only show "we also found additional results for you" for domain suggest if we are actually showing more domains. (MG)
+
+================================================================================================================
+================================================================================================================
+
+5.0.0
+* Support
+    - Added setting "Allow Customers To Reply From Any E-mail". Useful when a customer replies to a ticket and CCs unregistered users who might then reply afterwards as well. (AP)
+    - Added "Registered, but not using support E-mail" user type in routing rules, to be able to handle E-mails from users using the wrong alternate email. (AP)
+    - Added ability to properly sort the knowledgebase article list (AV)
+    - Support List Refresh Rate is now stored per staff member in database. (JD)
+    - Attatchments of png,gif,jpg and jpeg are now embedded in the post (AV)
+    - Ticket view enhancement.  Sidebar and Top meta bars do not scroll as ticket is scrolled to keep context available as you read through ticket (AV)
+    - Allow admin to always add attachments to support tickets, meaning the setting "Allow Customer File Uploads" is for customers only now. (MG)
+
+* Billing
+    - Changed Tax rules to more familiar add/edit/remove paradigm, added edit ability, and set error message for when someone tries to add tax rule of the same country/state/level (RG)
+    - Added proper administrative division naming to all countries.
+    - Added Chilean Peso to currencies (JD)
+    - Added new setting for payment processor plugins to designate plugins you want to make avaialable when viewing the billing tab in customer profiles (AV)
+    - Added the ability to refund a PayPal invoice, and it trigger a real refund at PayPal. (MG)
+
+* System/Admin
+    - Any heartbeat functions will now use the new heartbeat class to reduce bandwidth and ping overhead. (RG)
+    - Created API function to reset user password. (JD)
+    - Added API command to get invoice data. (JD)
+    - Reordered plugins on list to have default plugin on top, followed by the enabled ones, and then the disabled ones. Alphabetical order. (JD)
+    - Added a new event log when manually changing a status of a user package. (MG)
+    - Updated license and version checks to use new REST API. (MG)
+    - Added a "Test Connection" button on editing servers page to ensure your login credentials are correct (currently only cPanel). (MG)
+    - Added SSL Package List view. (MG)
+    - Fixed bug causing some plugin settings to be reset on each upgrade. (MG)
+    - Removed "Check Domain Availability" setting, will now always check if a registrar plugin is enabled for the TLD. (MG)
+    - Added ability to set unique permissions for Customer Groups, allowing refined permissions per group (AV)
+
+* Signup
+    - Added a client note with fraud details when using MaxMind plugin (MG)
+
+* Knowledgebase
+    - Articles now allow order.  This helps organize articles a little better as well as return articles by order via API calls (AV)
+    - Allow filtering of article list by tags to assist with organization and ordering (AV)
+
+* Plugins
+    - Fixed bug with domain updater service to skip any domains that do not have a registrar. (MG)
+    - Added a new setting to domain updater service to force recurring fees on all domains. (MG)
+    - Domain update service will now mark a domain as cancelled if it's in redemption (currently only working for eNom). (MG)
+    - Added new port setting to DirectAdmin plugin, so admins can use a custom port in DirectAdmin. (JD)
+    - Properly send dedicated IP when creating an account with cPanel plugin. (MG)
+    - Updated Authnet plugin to properly handle transactions under review. (JD)
+    - Added API Key functionality to ResellerClub Plugin. (MG)
+
+* Clients
+    - Added ability to search for a dedicated IP of a package in the global search (MG)
